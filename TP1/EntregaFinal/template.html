@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+	  <link rel="stylesheet" href="css/estilo.css" media="screen" title="no title" charset="utf-8">
+		<title>Filtros</title>
+	</head>
+	<body>
+		<header>
+			<h1>FILTROS</h1>
+		</header>
+		<section>
+			<div class="col-xs-6">
+				<h2>Original:</h2>
+				<button type="button" class="btn btn-secondary btn-lg btn-block">SELECCIONAR IMAGEN</button>
+				<img class="imagen" src="images/house.jpg" alt="">
+			</div>
+			<div class="col-xs-6">
+				<h2>Resultado:</h2>
+				<canvas id="canvas" width="300" height="300"></canvas>
+			</div>
+		</section>
+		<footer>
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Escala de grises</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Sepia</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Blanco y negro</button>
+			  </div>
+				<div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Brillo</button>
+			  </div>
+				<div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Negativo</button>
+			  </div>
+				<div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Suavizado</button>
+			  </div>
+				<div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Saturacion</button>
+			  </div>
+			</div>
+		</footer>
+	</body>
+	<script>
+		function cargaSrc()
+		{
+			archivoImagen = document.getElementById("archivo").files[0],
+			url=window.URL || window.webkitURL,
+			src = url.createObjectURL(archivoImagen);
+			cargarImagen();
+			$(".filtros")[0].css("visibility:visible");
+		}
+	</script>
+</html>
