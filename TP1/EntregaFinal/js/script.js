@@ -13,10 +13,10 @@ $("#brillo").on("click", brillo);
 $("#negativo").on("click", negativo);
 $("#contraste").on("click", contraste);
 
+
 //FUNCIONES
 
 //Cargar-imagen
-
 function fuente()
 {
   orig = document.getElementById("imagen").files[0],
@@ -32,16 +32,25 @@ function cargarimagen(){
     height = (imagen.height*width)/imagen.width;
     var original = '<canvas id="original" width="500" height="'+height+'"></canvas>';
     var resultado = '<canvas id="resultado" width="500" height="'+height+'"></canvas>';
-    var descargar = '<label for="imagen" class="botonarchivo"><span class="glyphicon glyphicon-down"></span>DESCARGAR IMAGEN</label><input type="button" name="" value="" id="descargar">'
+    var descargar = '<a id="descargar" href="#"class="botonarchivo">DESCARGAR IMAGEN</a>'
     $("#doriginal").append(original);
     $("#dresultado").append(descargar);
     $("#dresultado").append(resultado);
+    document.getElementById('descargar').addEventListener('click', function() {
+      download(this, 'resultado', 'Resultado.png');
+    }, false);
     var c=document.getElementById("original");
     ctx=c.getContext("2d");
     ctx.drawImage(this, 0, 0, width, height);
     c=document.getElementById("resultado");
     editada=c.getContext("2d");
   }
+}
+
+//descargar imagen
+function download(link, canvasId, filename) {
+  link.href = document.getElementById(canvasId).toDataURL();
+  link.download = filename;
 }
 
 //
