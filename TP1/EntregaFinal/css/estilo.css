@@ -3,6 +3,16 @@ h1{
 	font-size: 50px;
 }
 
-.imagen{
-	width: 80%;
+#imagen, #descargar{
+	display: none;
+}
+
+
+
+.botonarchivo{
+	display: block;
+}
+
+canvas{
+	border: black solid 1px;
 }
