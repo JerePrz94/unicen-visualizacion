@@ -12,6 +12,7 @@ $("#byn").on("click", byn);
 $("#brillo").on("click", brillo);
 $("#negativo").on("click", negativo);
 $("#contraste").on("click", contraste);
+$("#blur").on("click", blur);
 
 
 //FUNCIONES
@@ -26,19 +27,28 @@ function fuente()
 }
 
 function cargarimagen(){
+  $("#doriginal").remove();
+  $("#dresultado").remove();
+  $("#descargar").remove();
+  $("#imagen").remove();
+  $("#boton").remove();
   imagen.src = src;
   imagen.onload = function(){
     width = 500;
     height = (imagen.height*width)/imagen.width;
     var original = '<canvas id="original" width="500" height="'+height+'"></canvas>';
     var resultado = '<canvas id="resultado" width="500" height="'+height+'"></canvas>';
-    var descargar = '<a id="descargar" href="#"class="botonarchivo">DESCARGAR IMAGEN</a>'
+    var descargar = '<a id="descargar" href="#"class="botonarchivo"><span class="glyphicon glyphicon-download-alt"></span>DESCARGAR IMAGEN</a>'
+    var muestra = '<div class="col-xs-6 fotos" id="doriginal"><h2>Original:</h2><label for="imagen" class="botonarchivo" id="boton"><span class="glyphicon glyphicon-open"></span>SELECCIONAR IMAGEN</label><input type="file" name="" value="" id="imagen"></div><div class="col-xs-6 fotos" id="dresultado"><h2>Resultado:</h2></div>'
+    $("#fotos").append(muestra);
     $("#doriginal").append(original);
     $("#dresultado").append(descargar);
     $("#dresultado").append(resultado);
+    document.getElementById('imagen').addEventListener("change", fuente);
     document.getElementById('descargar').addEventListener('click', function() {
       download(this, 'resultado', 'Resultado.png');
     }, false);
+
     var c=document.getElementById("original");
     ctx=c.getContext("2d");
     ctx.drawImage(this, 0, 0, width, height);
@@ -185,4 +195,27 @@ function contraste(){
     }
   }
   editada.putImageData(imageData, 0, 0);
+}
+
+function blur(){
+  imageData = ctx.getImageData(0,0,width,height);
+  px = imageData.data;
+  let matriz = new Uint8ClampedArray(px.length);
+  matriz.set(px);
+  for (i=0; i<px.length; i++) {
+     if (i % 4 === 3) {
+       continue;
+     }
+     px[i] = ( matriz[i]
+        + (matriz[i - 8] || matriz[i])
+        + (matriz[i + 8] || matriz[i])
+        + (matriz[i - 8 * imageData.width] || matriz[i])
+        + (matriz[i + 8 * imageData.width] || matriz[i])
+        + (matriz[i - 8 * imageData.width - 8] || matriz[i])
+        + (matriz[i + 8 * imageData.width + 8] || matriz[i])
+        + (matriz[i + 8 * imageData.width - 8] || matriz[i])
+        + (matriz[i - 8 * imageData.width + 8] || matriz[i])
+        )/9;
+  }
+  editada.putImageData(imageData,0,0);
 }

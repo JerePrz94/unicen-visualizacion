@@ -4,45 +4,64 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link rel="stylesheet" href="css/estilo.css" media="screen" title="no title" charset="utf-8">
-		<title>Filtros</title>
+		<title>PHOTOFILTERS</title>
 	</head>
 	<body>
-		<header>
-			<h1>FILTROS</h1>
-		</header>
-		<hr>
-		<section>
-			<div class="col-xs-6" id="doriginal">
-				<h2>Original:</h2>
-				<label for="imagen" class="botonarchivo"><span class="glyphicon glyphicon-open"></span>SELECCIONAR IMAGEN</label>
-				<input type="file" name="" value="" id="imagen">
-			</div>
 
-			<div class="col-xs-6" id="dresultado">
-				<h2>Resultado:</h2>
+		<header>
+			<h1><span class="glyphicon glyphicon-camera"></span>PHOTOFILTERS</h1>
+		</header>
+
+		<hr>
+
+		<section>
+			<div id="fotos">
 			</div>
+			<label for="imagen" class="botonarchivo" id="boton"><span class="glyphicon glyphicon-open"></span>SELECCIONAR IMAGEN</label><input type="file" name="" value="" id="imagen">
 		</section>
+
+
+
 		<footer>
-			<div class="btn-group btn-group-justified" role="group" aria-label="...">
-			  <div class="btn-group" role="group">
-			    <button id="grises" type="button" class="btn btn-default">Escala de grises</button>
-			  </div>
-			  <div class="btn-group" role="group">
-			    <button id="sepia" type="button" class="btn btn-default">Sepia</button>
-			  </div>
-			  <div class="btn-group" role="group">
-			    <button id="byn" type="button" class="btn btn-default">Blanco y negro</button>
-			  </div>
-				<div class="btn-group" role="group">
-			    <button id="brillo" type="button" class="btn btn-default">Brillo</button>
-			  </div>
-				<div class="btn-group" role="group">
-			    <button id="negativo" type="button" class="btn btn-default">Negativo</button>
-			  </div>
-				<div class="btn-group" role="group">
-			    <button id="contraste" type="button" class="btn btn-default">Contraste</button>
-			  </div>
-			</div>
+				<hr>
+					<div class="tn-group btn-group-justified centrado">
+					  <div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="grises">
+					      <img src="images/grises.png" alt="...">ESCALA DE GRISES
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="sepia">
+					      <img src="images/sepia.png" alt="...">SEPIA
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="byn" >
+					      <img src="images/byn.png" alt="...">BLANCO Y NEGRO
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="negativo">
+					      <img src="images/negativo.png" alt="...">NEGATIVO
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="brillo">
+					      <img src="images/brillo.png" alt="...">BRILLO
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="contraste">
+					      <img src="images/contraste.png" alt="...">CONTRASTE
+					    </a>
+					  </div>
+						<div class="col-xs-1 col-md-1 btnfiltro">
+					    <a href="#" class="thumbnail" id="blur">
+					      <img src="images/blur.png" alt="...">BLUR
+					    </a>
+					  </div>
+					</div>
+
 		</footer>
 	</body>
 	<script src="js\jquery-3.1.0.min.js" charset="utf-8"></script>

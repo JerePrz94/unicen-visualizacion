@@ -1,13 +1,28 @@
-h1{
+@font-face {
+    font-family: "billabong";
+    src: "font/billabon.tff" format("truetype");
+}
+
+h1, h2{
 	text-align: center;
+	font-family: "billabong";
 	font-size: 50px;
+
 }
 
 #imagen{
 	display: none;
 }
 
+.fotos, label{
+	display: block;
+	margin: auto;
+	text-align: center;
+}
 
+#descargar{
+	text-decoration: none;
+}
 
 .botonarchivo{
 	display: block;
@@ -15,4 +30,32 @@ h1{
 
 canvas{
 	border: black solid 1px;
+}
+
+.btnfiltro{
+	text-align: center;
+}
+
+a{
+	font-weight: bold;
+	color: black;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+
+footer{
+		background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+}
+
+.centrado{
+	display: flex;
+	justify-content: center
 }
