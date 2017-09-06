@@ -13,6 +13,7 @@ $("#brillo").on("click", brillo);
 $("#negativo").on("click", negativo);
 $("#contraste").on("click", contraste);
 $("#blur").on("click", blur);
+$("#bordes").on("click", bordes);
 
 
 //FUNCIONES
@@ -197,10 +198,11 @@ function contraste(){
   editada.putImageData(imageData, 0, 0);
 }
 
+//blur
 function blur(){
   imageData = ctx.getImageData(0,0,width,height);
   px = imageData.data;
-  let matriz = new Uint8ClampedArray(px.length);
+  matriz = new Uint8ClampedArray(px.length);
   matriz.set(px);
   for (i=0; i<px.length; i++) {
      if (i % 4 === 3) {
@@ -209,13 +211,41 @@ function blur(){
      px[i] = ( matriz[i]
         + (matriz[i - 8] || matriz[i])
         + (matriz[i + 8] || matriz[i])
-        + (matriz[i - 8 * imageData.width] || matriz[i])
-        + (matriz[i + 8 * imageData.width] || matriz[i])
-        + (matriz[i - 8 * imageData.width - 8] || matriz[i])
-        + (matriz[i + 8 * imageData.width + 8] || matriz[i])
-        + (matriz[i + 8 * imageData.width - 8] || matriz[i])
-        + (matriz[i - 8 * imageData.width + 8] || matriz[i])
+        + (matriz[i - 8 * width] || matriz[i])
+        + (matriz[i + 8 * width] || matriz[i])
+        + (matriz[i - 8 * width - 8] || matriz[i])
+        + (matriz[i + 8 * width + 8] || matriz[i])
+        + (matriz[i + 8 * width - 8] || matriz[i])
+        + (matriz[i - 8 * width + 8] || matriz[i])
         )/9;
   }
   editada.putImageData(imageData,0,0);
+}
+
+//deteccion de bordes
+function bordes(){
+  imput = ctx.getImageData(0,0,width,height);
+  output = (width,height);
+  var imputdata = imput.data;
+  var outputdata = output.data;
+  for (x=1; x < width-1; x++){
+    for (y=1; y < height-1; y++){
+      for (c=0; c < 3; c++){
+        var i = ((y * width + x)*4 + c);
+        outputdata[i] = (127 +
+          - imputdata[i - width*4 - 4]
+          - imputdata[i - width*4]
+          - imputdata[i - width*4 + 4]
+          - imputdata[i - 4]
+          + 8*imputdata[i]
+          - imputdata[i + 4]
+          - imputdata[i + width*4 - 4]
+          - imputdata[i + width*4]
+          - imputdata[i + width*4 + 4]
+        );
+      }
+      outputdata[((y * width + x)*4 + 3)] = 255;
+    }
+  }
+  editada.putImageData(output,0,0);
 }
