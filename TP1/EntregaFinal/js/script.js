@@ -225,7 +225,7 @@ function blur(){
 //deteccion de bordes
 function bordes(){
   imput = ctx.getImageData(0,0,width,height);
-  output = (width,height);
+  output = ctx.getImageData(0,0,width,height);
   var imputdata = imput.data;
   var outputdata = output.data;
   for (x=1; x < width-1; x++){
