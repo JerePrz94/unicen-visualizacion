@@ -22,11 +22,10 @@ canvas{
 	border: black solid 1px;
 }
 
-
-
 section{
 	color: white;
 	text-shadow: 3px 3px 3px black;
+  position: relative;
 }
 
 footer{
@@ -34,7 +33,7 @@ footer{
     bottom: 0;
     left: 0;
     right: 0;
-    height: 20%;
+    height: 18%;
 		border-radius: 600px 600px 00px 0px;
 		padding-top: 20px;
 }
@@ -42,6 +41,7 @@ footer{
 a{
 	font-weight: bold;
 	color: black;
+  margin-bottom: 0;
 }
 
 a:hover{
@@ -60,12 +60,19 @@ a:hover{
 	color: white;
 }
 
+#fotos{
+  position: absolute;
+  padding-bottom: 10%;
+  margin: auto;
+  left:0;
+  right:0;
+}
+
 /*Clases*/
 
 .fotos, label{
 	display: block;
-	margin: auto;
-	text-align: center;
+  text-align: center;
 }
 
 .botonarchivo{

@@ -40,7 +40,7 @@ function cargarimagen(){
     var original = '<canvas id="original" width="500" height="'+height+'"></canvas>';
     var resultado = '<canvas id="resultado" width="500" height="'+height+'"></canvas>';
     var descargar = '<a id="descargar" href="#"class="botonarchivo"><span class="glyphicon glyphicon-download-alt"></span>DESCARGAR IMAGEN</a>'
-    var muestra = '<div class="col-xs-6 fotos" id="doriginal"><h2>Original:</h2><label for="imagen" class="botonarchivo" id="boton"><span class="glyphicon glyphicon-open"></span>SELECCIONAR IMAGEN</label><input type="file" name="" value="" id="imagen"></div><div class="col-xs-6 fotos" id="dresultado"><h2>Resultado:</h2></div>'
+    var muestra = '<div class="col-xs-6 fotos" id="doriginal"><h2>Original:</h2><label for="imagen" class="botonarchivo" id="boton"><span class="glyphicon glyphicon-open"></span>SELECCIONAR IMAGEN</label><input type="file" name="" value="" id="imagen"></div><div class="col-xs-6 fotos " id="dresultado"><h2>Resultado:</h2></div>'
     $("#fotos").append(muestra);
     $("#doriginal").append(original);
     $("#dresultado").append(descargar);
