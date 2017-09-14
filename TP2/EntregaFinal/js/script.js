@@ -10,9 +10,6 @@ var lugares = [];
 var original = {x:0,y:0,pieza: null};
 var solucion = [];
 
-for (var i = 0; i < dificultad; i++) {
-  solucion[i]=false;
-}
 
 $(".jugar").on("click", function(){
   $(".dificultad").slideDown();
@@ -50,11 +47,17 @@ $("#canvas").css("display","none");
 
 
 function cargar(){
+  formas = [];
+  lugares = [];
+  for (var i = 0; i < dificultad; i++) {
+    solucion[i]=false;
+  }
   tablero();
   cronometro();
   llenartablero();
   llenarpiezas();
   $(".dificultad").slideUp();
+
 }
 
 
