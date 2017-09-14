@@ -1,0 +1,41 @@
+#canvas{/*
+  width: 80%;
+  height: 50%; */
+  border: #000 solid 1px;
+  color: yellow;
+}
+
+body{
+  text-align: center;
+  background-image: url("../images/lego.jpg");
+}
+
+.clock{
+  display: inline-block;
+
+}
+
+.cronometro{
+    display: inline-block;
+    background-color: white;
+    border-radius: 0px 0px 30px 30px;
+    margin-bottom: 1%;
+    border: #444 solid 10px;
+    border-top: 0px;
+    box-shadow: 1px 1px 50px black;
+}
+
+.termino{
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  position: absolute;
+  color: white;
+  padding-top: 30%;
+  opacity: 0.8;
+}
+
+.contenedor{
+  height: 170px;
+}
