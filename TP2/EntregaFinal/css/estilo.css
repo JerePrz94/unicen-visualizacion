@@ -32,10 +32,27 @@ body{
   background-color: #333;
   position: absolute;
   color: white;
-  padding-top: 30%;
+  padding-top: 20%;
   opacity: 0.8;
 }
 
 .contenedor{
   height: 170px;
+}
+
+.btn{
+  color: black;
+}
+
+.empezar{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: white;
+  padding-top: 20%;
+}
+
+.dificultad{
+  margin-top: 2px;
+  display: none;
 }

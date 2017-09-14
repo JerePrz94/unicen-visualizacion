@@ -14,11 +14,50 @@ for (var i = 0; i < dificultad; i++) {
   solucion[i]=false;
 }
 
+$(".jugar").on("click", function(){
+  $(".dificultad").slideDown();
+})
 
+$(".facil").on("click", function(){
+  dificultad=4;
+  cargar();
+  $(".empezar").slideUp();
+  $(".termino").slideUp();
+})
+
+$(".medio").on("click", function(){
+  dificultad=5;
+  cargar();
+  $(".empezar").slideUp();
+  $(".termino").slideUp();
+})
+
+$(".dificil").on("click", function(){
+  dificultad=6;
+  cargar();
+  $(".empezar").slideUp();
+  $(".termino").slideUp();
+})
+
+
+
+
+
+//
 $(".cronometro").css("display","none");
 $("#canvas").css("display","none");
-$(document).ready(cronometro);
-tablero();
+
+
+
+function cargar(){
+  tablero();
+  cronometro();
+  llenartablero();
+  llenarpiezas();
+  $(".dificultad").slideUp();
+}
+
+
 
 
 function actualizar(){
@@ -33,6 +72,7 @@ function actualizar(){
 
 function finalizar(){
   clock.stop();
+  $("#tiempo").html("Tiempo de Resolucion: " + clock.time.time +" segundos" );
   $(".cronometro").slideUp()
   $(".termino").css("display", "block");
 }
