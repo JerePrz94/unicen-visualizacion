@@ -9,7 +9,16 @@ var formas = [];
 var lugares = [];
 var original = {x:0,y:0,pieza: null};
 var solucion = [];
+var imagenes = [];
 
+
+for (var i = 1; i <= dificultad; i++) {
+  var foto = new Image();
+  foto.src = "images/" + i +".png";
+  foto.onload = function () {
+    imagenes.push(this);
+  }
+}
 
 $(".jugar").on("click", function(){
   $(".dificultad").slideDown();
@@ -113,22 +122,22 @@ function llenarpiezas() {
   var a = canvas.width / 2;
   for (var i = 0; i < dificultad; i++) {
     if (i === 0) {
-      var forma = new cuadrado(a + ex, ey, ladogeneral, 'white')
+      var forma = new cuadrado(a + ex, ey, ladogeneral, 'white', imagenes[i])
     }
     else if (i === 1) {
-      var forma = new rectangulo(a + (ex*3), ey, ladogeneral, 'white')
+      var forma = new rectangulo(a + (ex*3), ey, ladogeneral, 'white', imagenes[i])
     }
     else if (i === 2) {
-      var forma = new circulo(a + ex, ey*3, ladogeneral, 'white')
+      var forma = new circulo(a + ex, ey*3, ladogeneral, 'white', imagenes[i])
     }
     else if (i === 3) {
-      var forma = new triangulo(a + (ex*3), ey*3, ladogeneral, 'white')
+      var forma = new triangulo(a + (ex*3), ey*3, ladogeneral, 'white', imagenes[i])
     }
     else if (i === 4) {
-      var forma = new rombo(a + ex, ey*5, ladogeneral, 'white')
+      var forma = new rombo(a + ex, ey*5, ladogeneral, 'white', imagenes[i])
     }
     else {
-      var forma = new trapezoide(a + (ex*3), ey*5, ladogeneral, 'white')
+      var forma = new trapezoide(a + (ex*3), ey*5, ladogeneral, 'white', imagenes[i])
     }
     formas.push(forma);
     formas[i].dibujar();
@@ -138,52 +147,58 @@ function llenarpiezas() {
 
 //------------------------------------------------CLASES
 
-function cuadrado(x, y, rad, col){
+function cuadrado(x, y, rad, col, img){
   this.forma = 'cuadrado';
   this.posx = x;
   this.posy = y;
   this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
-function rectangulo(x, y, rad, col){
+function rectangulo(x, y, rad, col, img){
   this.forma = 'rectangulo';
   this.posx = x;
   this.posy = y;
   this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
-function circulo(x, y, rad, col){
+function circulo(x, y, rad, col, img){
   this.forma = 'circulo';
   this.posx = x;
   this.posy = y;
   this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
-function triangulo(x, y, base, col){
+function triangulo(x, y, rad, col, img){
   this.forma = 'triangulo';
   this.posx = x;
   this.posy = y;
-  this.radio = base;
+  this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
-function rombo(x, y, base, col){
+function rombo(x, y, rad, col, img){
   this.forma = 'rombo';
   this.posx = x;
   this.posy = y;
-  this.radio = base;
+  this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
-function trapezoide(x, y, base, col){
+function trapezoide(x, y, rad, col, img){
   this.forma = 'trapezoide';
   this.posx = x;
   this.posy = y;
-  this.radio = base;
+  this.radio = rad;
   this.color = col;
+  this.imagen = img;
 }
 
 
@@ -191,34 +206,61 @@ function trapezoide(x, y, base, col){
 //------------------------------------------------DIBUJAR
 cuadrado.prototype.dibujar = function () {
   ctx.fillStyle = this.color;
+    ctx.save();
   ctx.fillRect(this.posx - this.radio, this.posy - this.radio, this.radio*2, this.radio*2);
+  if(this.imagen !=null){
+    ctx.drawImage(this.imagen, this.posx - this.radio, this.posy- this.radio, this.radio * 2 , this.radio * 2);
+  }
 };
 
 rectangulo.prototype.dibujar = function () {
   ctx.fillStyle = this.color;
+    ctx.save();
   ctx.fillRect(this.posx - this.radio, this.posy - (this.radio*0.8), this.radio*2, this.radio*1.6);
+  if(this.imagen !=null){
+    ctx.drawImage(this.imagen, this.posx - this.radio, this.posy - (this.radio*0.8), this.radio*2, this.radio*1.6);
+  }
 };
 
 circulo.prototype.dibujar = function () {
   ctx.fillStyle = this.color;
+  ctx.save();
   ctx.beginPath();
   ctx.arc(this.posx, this.posy, this.radio, 0, Math.PI * 2);
   ctx.fill();
   ctx.closePath();
+  if(this.imagen != null){
+    ctx.clip();
+    ctx.drawImage(this.imagen, this.posx - this.radio, this.posy- this.radio, this.radio * 2 , this.radio * 2);
+  }
+  ctx.stroke();
+  ctx.restore();
 };
 
 triangulo.prototype.dibujar = function () {
-  ctx.fillStyle = this.color;
+    ctx.fillStyle = this.color;
+    ctx.save();
   ctx.beginPath();
   ctx.moveTo(this.posx - (this.radio),this.posy + (this.radio));
   ctx.lineTo(this.posx + (this.radio), this.posy + (this.radio));
   ctx.lineTo(this.posx,this.posy - (this.radio));
   ctx.fill();
   ctx.closePath();
+  if(this.imagen != null){
+    var pattern = ctx.createPattern(this.imagen, "no-repeat");
+    ctx.fillStyle = pattern;
+    ctx.beginPath();
+    ctx.moveTo(this.posx - (this.radio),this.posy + (this.radio));
+    ctx.lineTo(this.posx + (this.radio), this.posy + (this.radio));
+    ctx.lineTo(this.posx,this.posy - (this.radio));
+    ctx.fill();
+    ctx.closePath();
+  }
 };
 
 rombo.prototype.dibujar = function () {
   ctx.fillStyle = this.color;
+    ctx.save();
   ctx.beginPath();
   ctx.moveTo(this.posx - (this.radio),this.posy);
   ctx.lineTo(this.posx, this.posy + (this.radio));
@@ -230,6 +272,7 @@ rombo.prototype.dibujar = function () {
 
 trapezoide.prototype.dibujar = function () {
   ctx.fillStyle = this.color;
+    ctx.save();
   ctx.beginPath();
   ctx.moveTo(this.posx - (this.radio),this.posy + this.radio);
   ctx.lineTo(this.posx + this.radio, this.posy + (this.radio));
@@ -263,9 +306,9 @@ $("canvas").on( "mousedown", function( event ) {
   var mY= event.pageY - canvas.offsetTop;
   for (var i = 0; i < formas.length; i++) {
     if ((mX > (formas[i].posx-formas[i].radio))&&(mX < (formas[i].posx+formas[i].radio))&&(mY > (formas[i].posy-formas[i].radio))&&(mY < (formas[i].posy+formas[i].radio))) {
-        original.x = formas[i].posx;
-        original.y = formas[i].posy;
-        original.pieza = i;
+      original.x = formas[i].posx;
+      original.y = formas[i].posy;
+      original.pieza = i;
 
     }
   }
@@ -277,7 +320,7 @@ $("canvas").on( "mousemove", function( event ) {
   var mX = event.pageX - canvas.offsetLeft;
   var mY = event.pageY - canvas.offsetTop;
   if (formas[original.pieza] != null) {
-  formas[original.pieza].posx = mX;
+    formas[original.pieza].posx = mX;
     formas[original.pieza].posy = mY;
   }
   actualizar();
@@ -289,24 +332,24 @@ $("canvas").on( "mouseup", function( event ) {
   var mY = event.pageY - canvas.offsetTop;
   for (var i = 0; i < lugares.length; i++) {
     if ((mX > (lugares[i].posx-lugares[i].radio))&&(mX < (lugares[i].posx+lugares[i].radio))&&(mY > (lugares[i].posy-lugares[i].radio))&&(mY < (lugares[i].posy+lugares[i].radio)))
-      if (lugares[i].forma == formas[original.pieza].forma) {
-        solucion[original.pieza]=true;
-        formas[original.pieza].posx=lugares[i].posx;
-        formas[original.pieza].posy=lugares[i].posy;
-        original.pieza=null;
-        var termino=true;
-        for (var i = 0; i < solucion.length; i++) {
-          if (solucion[i]==false) {
-            termino=false;
-          }
+    if (lugares[i].forma == formas[original.pieza].forma) {
+      solucion[original.pieza]=true;
+      formas[original.pieza].posx=lugares[i].posx;
+      formas[original.pieza].posy=lugares[i].posy;
+      original.pieza=null;
+      var termino=true;
+      for (var i = 0; i < solucion.length; i++) {
+        if (solucion[i]==false) {
+          termino=false;
         }
-        if (termino) {
-          finalizar();
-        }
-        actualizar();
-        return;
       }
+      if (termino) {
+        finalizar();
+      }
+      actualizar();
+      return;
     }
+  }
   formas[original.pieza].posx=original.x;
   formas[original.pieza].posy=original.y;
   original.pieza=null;
