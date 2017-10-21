@@ -1,0 +1,205 @@
+.juego{
+  width: 80%;
+  position: absolute;
+  margin-left: 10%;
+  top: 10%;
+}
+
+
+
+/*FONDO*/
+
+body{
+  background: url('../sprites/fondo/fondo.jpg') left 0px;
+}
+
+.fondo{
+  width: 100%;
+  height: 365px;
+  position: absolute;
+  left: 0px;
+}
+
+.capa1{
+  width: 100%;
+  height: 100%;
+  background: url('../sprites/fondo/cielo.png') left 0px;
+  background-size: 100% auto;
+  position: absolute;
+  z-index: 1;
+}
+
+.capa2{
+  width: 100%;
+  height: 100%;
+  background: url('../sprites/fondo/horizonte.png') left 0px;
+  background-size: contain;
+  position: absolute;
+  background-repeat: repeat-x;
+  z-index: 2;
+  animation: animacionhorizonte 16.0s infinite;
+  animation-timing-function: linear;
+}
+
+.capa3{
+  width: 100%;
+  height: 100%;
+  background: url('../sprites/fondo/cactuslejos.png') left 0px;
+  background-size: contain;
+  position: absolute;
+  top: 97px ;
+  background-repeat: repeat-x;
+  z-index: 3;
+  animation: animacioncactuslejos 6.0s infinite;
+  animation-timing-function: linear;
+}
+
+.capa4{
+  width: 100%;
+  height: 100%;
+  background: url('../sprites/fondo/cactus.png') left 0px;
+  background-size: contain;
+  position: absolute;
+  top: 200px;
+  background-repeat: repeat-x;
+  z-index: 4;
+  animation: animacioncactus 3.0s infinite;
+  animation-timing-function: linear;
+}
+
+.capa5{
+  width: 100%;
+  height: 60%;
+  background: url('../sprites/fondo/pasto.png') left 0px;
+  background-size: contain;
+  position: absolute;
+  top: 390px;
+  background-repeat: repeat-x;
+  z-index: 6;
+  animation: animacionpasto 1.0s infinite;
+  animation-timing-function: linear;
+}
+
+
+@keyframes animacionpasto {
+  100%{background-position: -540px 0px}
+}
+
+@keyframes animacioncactus {
+  100%{background-position: -690px 0px}
+}
+
+@keyframes animacioncactuslejos {
+  100%{background-position: -812px 0px}
+}
+
+
+@keyframes animacionhorizonte {
+  100%{background-position: -930px 0px}
+}
+
+
+
+/*PERSONAJE*/
+
+.personaje{
+  width: 250px;
+  height: 215px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 320px;
+  left: 10px;
+  z-index: 5;
+}
+
+.quieto{
+  animation: quieto 1.0s steps(1) infinite;
+}
+
+.saltar{
+  animation: saltar 1.0s steps(1) infinite;
+}
+
+.correr{
+  animation: correr 1.0s steps(1) infinite;
+}
+
+.atacar{
+  animation: atacar 1.0s steps(1) infinite;
+}
+
+.deslizar{
+  animation: deslizar 1.0s steps(1) infinite;
+}
+
+.morir{
+  animation: morir 1.0s steps(1) infinite;
+}
+
+@keyframes quieto {
+  0%{ background: url('../sprites/Idle (1).png') left 0px;background-size: 100% auto;}
+  10%{ background: url('../sprites/Idle (2).png') left 0px;background-size: 100% auto;}
+  20%{ background: url('../sprites/Idle (3).png') left 0px;background-size: 100% auto;}
+  30%{ background: url('../sprites/Idle (4).png') left 0px;background-size: 100% auto;}
+  40%{ background: url('../sprites/Idle (5).png') left 0px;background-size: 100% auto;}
+  50%{ background: url('../sprites/Idle (6).png') left 0px;background-size: 100% auto;}
+  60%{ background: url('../sprites/Idle (7).png') left 0px;background-size: 100% auto;}
+  70%{ background: url('../sprites/Idle (8).png') left 0px;background-size: 100% auto;}
+  80%{ background: url('../sprites/Idle (9).png') left 0px;background-size: 100% auto;}
+  90%{ background: url('../sprites/Idle (10).png') left 0px;background-size: 100% auto;}
+}
+
+@keyframes saltar {
+  0%{ background: url('../sprites/Jump (1).png') left 0px;background-size: 100% auto;}
+  10%{ background: url('../sprites/Jump (2).png') left 0px;background-size: 100% auto;top: 150px;}
+  20%{ background: url('../sprites/Jump (3).png') left 0px;background-size: 100% auto;top: 100px;}
+  30%{ background: url('../sprites/Jump (4).png') left 0px;background-size: 100% auto;top: 50px;}
+  40%{ background: url('../sprites/Jump (5).png') left 0px;background-size: 100% auto;top: 0px;}
+  50%{ background: url('../sprites/Jump (6).png') left 0px;background-size: 100% auto;top: 0px;}
+  60%{ background: url('../sprites/Jump (7).png') left 0px;background-size: 100% auto;top: 50px;}
+  70%{ background: url('../sprites/Jump (8).png') left 0px;background-size: 100% auto;top: 100px;}
+  80%{ background: url('../sprites/Jump (9).png') left 0px;background-size: 100% auto;top: 150px;}
+  90%{ background: url('../sprites/Jump (10).png') left 0px;background-size: 100% auto;top:200px;}
+}
+
+@keyframes correr {
+  0%{ background: url('../sprites/Run (1).png') left 0px;background-size: 100% auto;}
+  12.5%{ background: url('../sprites/Run (2).png') left 0px;background-size: 100% auto;}
+  25%{ background: url('../sprites/Run (3).png') left 0px;background-size: 100% auto;}
+  37.5%{ background: url('../sprites/Run (4).png') left 0px;background-size: 100% auto;}
+  50%{ background: url('../sprites/Run (5).png') left 0px;background-size: 100% auto;}
+  62.5%{ background: url('../sprites/Run (6).png') left 0px;background-size: 100% auto;}
+  75%{ background: url('../sprites/Run (7).png') left 0px;background-size: 100% auto;}
+  87.5%{ background: url('../sprites/Run (8).png') left 0px;background-size: 100% auto;}
+}
+
+@keyframes atacar {
+  0%{ background: url('../sprites/Melee (1).png') left 0px;background-size: 100% auto;}
+  14%{ background: url('../sprites/Melee (2).png') left 0px;background-size: 100% auto;}
+  28%{ background: url('../sprites/Melee (3).png') left 0px;background-size: 100% auto;}
+  43%{ background: url('../sprites/Melee (4).png') left 0px;background-size: 100% auto;}
+  57%{ background: url('../sprites/Melee (5).png') left 0px;background-size: 100% auto;}
+  72%{ background: url('../sprites/Melee (6).png') left 0px;background-size: 100% auto;}
+  86%{ background: url('../sprites/Melee (7).png') left 0px;background-size: 100% auto;}
+}
+
+@keyframes deslizar {
+  0%{ background: url('../sprites/Slide (1).png') left 0px;background-size: 100% auto;}
+  20%{ background: url('../sprites/Slide (2).png') left 0px;background-size: 100% auto;}
+  40%{ background: url('../sprites/Slide (3).png') left 0px;background-size: 100% auto;}
+  60%{ background: url('../sprites/Slide (4).png') left 0px;background-size: 100% auto;}
+  80%{ background: url('../sprites/Slide (5).png') left 0px;background-size: 100% auto;}
+}
+
+@keyframes morir {
+  0%{ background: url('../sprites/Dead (1).png') left 0px;background-size: 100% auto;}
+  10%{ background: url('../sprites/Dead (2).png') left 0px;background-size: 100% auto;}
+  20%{ background: url('../sprites/Dead (3).png') left 0px;background-size: 100% auto;}
+  30%{ background: url('../sprites/Dead (4).png') left 0px;background-size: 100% auto;}
+  40%{ background: url('../sprites/Dead (5).png') left 0px;background-size: 100% auto;}
+  50%{ background: url('../sprites/Dead (6).png') left 0px;background-size: 100% auto;}
+  60%{ background: url('../sprites/Dead (7).png') left 0px;background-size: 100% auto;}
+  70%{ background: url('../sprites/Dead (8).png') left 0px;background-size: 100% auto;}
+  80%{ background: url('../sprites/Dead (9).png') left 0px;background-size: 100% auto;}
+  90%{ background: url('../sprites/Dead (10).png') left 0px;background-size: 100% auto;}
+}
