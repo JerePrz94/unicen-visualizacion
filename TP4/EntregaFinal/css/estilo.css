@@ -5,7 +5,6 @@
 }
 
 
-
 /*FONDO*/
 
 body{
@@ -68,6 +67,7 @@ body{
   top: 200px;
   background-repeat: repeat-x;
   z-index: 4;
+  overflow: hidden;
 }
 
 .capa4a{
@@ -131,15 +131,16 @@ body{
 }
 
 .saltar{
-  animation: saltar 1.0s steps(1);
+  animation: saltar 1.0s;
+  animation-timing-function: linear;
 }
 
 .correr{
-  animation: correr 1.0s steps(1) infinite;
+  animation: correr 0.7s steps(1) infinite;
 }
 
 .atacar{
-  animation: atacar 1.0s steps(1);
+  animation: atacar 0.5s steps(1);
 }
 
 .deslizar{
@@ -165,15 +166,16 @@ body{
 
 @keyframes saltar {
   0%{ background: url('../sprites/Jump (1).png') left 0px;background-size: 100% auto;}
-  10%{ background: url('../sprites/Jump (2).png') left 0px;background-size: 100% auto;top: 150px;}
-  20%{ background: url('../sprites/Jump (3).png') left 0px;background-size: 100% auto;top: 100px;}
-  30%{ background: url('../sprites/Jump (4).png') left 0px;background-size: 100% auto;top: 50px;}
-  40%{ background: url('../sprites/Jump (5).png') left 0px;background-size: 100% auto;top: 0px;}
+  10%{ background: url('../sprites/Jump (2).png') left 0px;background-size: 100% auto;top: 256px;}
+  20%{ background: url('../sprites/Jump (3).png') left 0px;background-size: 100% auto;top: 192px;}
+  30%{ background: url('../sprites/Jump (4).png') left 0px;background-size: 100% auto;top: 128px;}
+  40%{ background: url('../sprites/Jump (5).png') left 0px;background-size: 100% auto;top: 64px;}
   50%{ background: url('../sprites/Jump (6).png') left 0px;background-size: 100% auto;top: 0px;}
-  60%{ background: url('../sprites/Jump (7).png') left 0px;background-size: 100% auto;top: 50px;}
-  70%{ background: url('../sprites/Jump (8).png') left 0px;background-size: 100% auto;top: 100px;}
-  80%{ background: url('../sprites/Jump (9).png') left 0px;background-size: 100% auto;top: 150px;}
-  90%{ background: url('../sprites/Jump (10).png') left 0px;background-size: 100% auto;top:200px;}
+  60%{ background: url('../sprites/Jump (7).png') left 0px;background-size: 100% auto;top: 64px;}
+  70%{ background: url('../sprites/Jump (8).png') left 0px;background-size: 100% auto;top: 128px;}
+  80%{ background: url('../sprites/Jump (9).png') left 0px;background-size: 100% auto;top: 192px;}
+  90%{ background: url('../sprites/Jump (10).png') left 0px;background-size: 100% auto;top:256px;}
+  100%{ background: url('../sprites/Jump (10).png') left 0px;background-size: 100% auto;top:320px;}
 }
 
 @keyframes correr {
@@ -216,4 +218,76 @@ body{
   70%{ background: url('../sprites/Dead (8).png') left 0px;background-size: 100% auto;}
   80%{ background: url('../sprites/Dead (9).png') left 0px;background-size: 100% auto;}
   90%{ background: url('../sprites/Dead (10).png') left 0px;background-size: 100% auto;}
+}
+
+
+/*OBJETOS*/
+
+.cactus{
+  width: 180px;
+  height: 190px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 140px;
+  z-index: 5;
+  background: url('../sprites/objetos/cactusote.png');
+  background-size: 100% auto;
+  animation: aparece 2.0s;
+  animation-timing-function: linear;
+}
+
+.robertito{
+  width: 170px;
+  height: 200px;
+  background-repeat: no-repeat;
+  z-index: 5;
+  animation: correrober 1.0s steps(1) infinite;
+}
+
+.roberc{
+  position: absolute;
+  top: 130px;
+  animation: aparece 1.5s;
+  animation-timing-function: linear;
+}
+
+.roberm{
+  width: 170px;
+  height: 200px;
+  background-repeat: no-repeat;
+  z-index: 5;
+  animation: muererober 1.0s steps(1);
+}
+
+
+
+@keyframes aparece {
+  0%{ right: -20%;}
+  100%{ right: 100%;}
+}
+
+@keyframes correrober {
+  0%{ background: url('../sprites/objetos/rober/Run__000.png') left 0px;background-size: 100% auto;}
+  10%{ background: url('../sprites/objetos/rober/Run__001.png') left 0px;background-size: 100% auto;}
+  20%{ background: url('../sprites/objetos/rober/Run__002.png') left 0px;background-size: 100% auto;}
+  30%{ background: url('../sprites/objetos/rober/Run__003.png') left 0px;background-size: 100% auto;}
+  40%{ background: url('../sprites/objetos/rober/Run__004.png') left 0px;background-size: 100% auto;}
+  50%{ background: url('../sprites/objetos/rober/Run__005.png') left 0px;background-size: 100% auto;}
+  60%{ background: url('../sprites/objetos/rober/Run__006.png') left 0px;background-size: 100% auto;}
+  70%{ background: url('../sprites/objetos/rober/Run__007.png') left 0px;background-size: 100% auto;}
+  80%{ background: url('../sprites/objetos/rober/Run__008.png') left 0px;background-size: 100% auto;}
+  90%{ background: url('../sprites/objetos/rober/Run__009.png') left 0px;background-size: 100% auto;}
+}
+
+@keyframes muererober {
+  0%{ background: url('../sprites/objetos/rober/Dead__000.png') left 0px;background-size: 100% auto;}
+  10%{ background: url('../sprites/objetos/rober/Dead__001.png') left 0px;background-size: 100% auto;}
+  20%{ background: url('../sprites/objetos/rober/Dead__002.png') left 0px;background-size: 100% auto;}
+  30%{ background: url('../sprites/objetos/rober/Dead__003.png') left 0px;background-size: 100% auto;}
+  40%{ background: url('../sprites/objetos/rober/Dead__004.png') left 0px;background-size: 100% auto;}
+  50%{ background: url('../sprites/objetos/rober/Dead__005.png') left 0px;background-size: 100% auto;}
+  60%{ background: url('../sprites/objetos/rober/Dead__006.png') left 0px;background-size: 100% auto;}
+  70%{ background: url('../sprites/objetos/rober/Dead__007.png') left 0px;background-size: 100% auto;}
+  80%{ background: url('../sprites/objetos/rober/Dead__008.png') left 0px;background-size: 100% auto;}
+  90%{ background: url('../sprites/objetos/rober/Dead__009.png') left 0px;background-size: 100% auto;}
 }
