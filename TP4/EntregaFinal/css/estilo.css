@@ -259,7 +259,25 @@ body{
   animation: muererober 1.0s steps(1);
 }
 
+.puntaje{
+  font-size: 40px;
+  font-family: "lucida console";
+  color: white;
+  position: absolute;
+  right: 0px;
+  padding: 10px;
+  z-index: 2;
+}
 
+.vidas{
+  font-size: 40px;
+  font-family: "lucida console";
+  color: white;
+  position: absolute;
+  left: 0px;
+  padding: 10px;
+  z-index: 2;
+}
 
 @keyframes aparece {
   0%{ right: -20%;}
