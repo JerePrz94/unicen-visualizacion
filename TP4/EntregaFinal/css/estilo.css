@@ -1,14 +1,44 @@
-.juego{
-  width: 80%;
-  position: absolute;
-  margin-left: 10%;
+.presentacion{
+  display: block;
+
 }
+
+
+
+.logo{
+  width: 40%;
+  left: 30%;
+  height: 25%;
+  position: absolute;
+  background: url('../sprites/fondo/logo.png') left 0px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.cara{
+  width: 15%;
+  height: 30%;
+  top: 25%;
+  left: 40%;
+  position: absolute;
+  background: url('../sprites/fondo/cara.png') left 0px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
 
 
 /*FONDO*/
 
 body{
   background: url('../sprites/fondo/fondo.jpg') left 0px;
+}
+
+.juego{
+  width: 80%;
+  position: absolute;
+  margin-left: 10%;
+  display: none;
 }
 
 .fondo{

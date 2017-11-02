@@ -18,9 +18,11 @@ $(document).keydown(function(e){
     $(".personaje").addClass("saltar");
     $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
     function(e) {
-      salto.play();
-      $(".personaje").removeClass("saltar");
-      $(".personaje").addClass("correr");
+      if (vidas > 0) {
+        salto.play()
+        $(".personaje").removeClass("saltar");
+        $(".personaje").addClass("correr");
+      }
     });
   }
   else if (e.keyCode === 37 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
@@ -29,8 +31,10 @@ $(document).keydown(function(e){
     facaso.play();
     $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
     function(e) {
-      $(".personaje").removeClass("atacar");
-      $(".personaje").addClass("correr");
+      if (vidas > 0) {
+        $(".personaje").removeClass("atacar");
+        $(".personaje").addClass("correr");
+      }
     });
   }
   else if (e.keyCode === 40 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
@@ -38,8 +42,10 @@ $(document).keydown(function(e){
     $(".personaje").addClass("deslizar");
     $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
     function(e) {
-      $(".personaje").removeClass("deslizar");
-      $(".personaje").addClass("correr");
+      if (vidas > 0) {
+        $(".personaje").removeClass("deslizar");
+        $(".personaje").addClass("correr");
+      }
     });
   }
 })
@@ -73,7 +79,7 @@ function jugar(){
         });
       }
     }
-  } ,1500);
+  } ,2000);
 
   enemigoe = setInterval(function(){
     var cactusotes = $(".cactus");
@@ -129,6 +135,7 @@ function jugar(){
 function terminar (){
   $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
   function(e) {
+    jugando = false;
     $(".personaje").removeClass("morir");
     $(".personaje").css({  "background": "url('sprites/Dead (10).png')",
     "left": "0px",
@@ -138,7 +145,6 @@ function terminar (){
   $(".capa3").removeClass("capa3a");
   $(".capa4").removeClass("capa4a");
   $(".capa5").removeClass("capa5a");
-  jugando = false;
 }
 
 function empezar(){
@@ -149,6 +155,7 @@ function empezar(){
 
 function morir(){
   $(".personaje").removeClass("correr");
+  $(".personaje").removeClass("atacar");
   $(".personaje").addClass("morir");
   clearInterval(enemigoe);
   clearInterval(enemigo);
