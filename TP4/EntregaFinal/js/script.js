@@ -7,46 +7,54 @@ var vidas = 3;
 var enemigo;
 var enemigoe;
 var puntos = 0;
+var mjuego = false;
+
+
+
+
+
 
 /*asignar funciones a las teclas*/
 $(document).keydown(function(e){
-  if ((e.keyCode === 39) && (empezo == false)) {
-    jugar();
-  }
-  else if (e.keyCode === 38 && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("atacar")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
-    $(".personaje").removeClass("correr");
-    $(".personaje").addClass("saltar");
-    $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-    function(e) {
-      if (vidas > 0) {
-        salto.play()
-        $(".personaje").removeClass("saltar");
-        $(".personaje").addClass("correr");
-      }
-    });
-  }
-  else if (e.keyCode === 37 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
-    $(".personaje").removeClass("correr");
-    $(".personaje").addClass("atacar");
-    facaso.play();
-    $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-    function(e) {
-      if (vidas > 0) {
-        $(".personaje").removeClass("atacar");
-        $(".personaje").addClass("correr");
-      }
-    });
-  }
-  else if (e.keyCode === 40 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
-    $(".personaje").removeClass("correr");
-    $(".personaje").addClass("deslizar");
-    $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-    function(e) {
-      if (vidas > 0) {
-        $(".personaje").removeClass("deslizar");
-        $(".personaje").addClass("correr");
-      }
-    });
+  if (mjuego) {
+    if ((e.keyCode === 39) && (empezo == false)) {
+      jugar();
+    }
+    else if (e.keyCode === 38 && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("atacar")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
+      $(".personaje").removeClass("correr");
+      $(".personaje").addClass("saltar");
+      $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+      function(e) {
+        if (vidas > 0) {
+          salto.play()
+          $(".personaje").removeClass("saltar");
+          $(".personaje").addClass("correr");
+        }
+      });
+    }
+    else if (e.keyCode === 37 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
+      $(".personaje").removeClass("correr");
+      $(".personaje").addClass("atacar");
+      facaso.play();
+      $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+      function(e) {
+        if (vidas > 0) {
+          $(".personaje").removeClass("atacar");
+          $(".personaje").addClass("correr");
+        }
+      });
+    }
+    else if (e.keyCode === 40 && !($(".personaje").hasClass("saltar")) && !($(".personaje").hasClass("quieto")) && !($(".personaje").hasClass("morir")) && (jugando == true)) {
+      $(".personaje").removeClass("correr");
+      $(".personaje").addClass("deslizar");
+      $(".personaje").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+      function(e) {
+        if (vidas > 0) {
+          $(".personaje").removeClass("deslizar");
+          $(".personaje").addClass("correr");
+        }
+      });
+    }
   }
 })
 
@@ -145,12 +153,15 @@ function terminar (){
   $(".capa3").removeClass("capa3a");
   $(".capa4").removeClass("capa4a");
   $(".capa5").removeClass("capa5a");
+  $("#puntos").html("Puntaje: " + puntos +" puntos" );
+  $(".termino").css("display", "block");
 }
 
 function empezar(){
   $(".personaje").addClass("quieto");
   empezo = false;
   puntos = 0;
+  vidas = 3;
 }
 
 function morir(){
@@ -174,6 +185,19 @@ function morir(){
   }
 }
 
+function reiniciar(){
+  $(".personaje").removeClass("morir");
+  $(".personaje").removeClass("correr");
+  $(".personaje").removeClass("saltar");
+  $(".personaje").removeClass("deslizar");
+  $(".personaje").removeClass("atacar");
+  $(".personaje").addClass("quieto");
+  $(".termino").css("display", "none");
+  empezar();
+  mostrarvidas();
+  mostrarpuntos()
+}
+
 function mostrarpuntos(){
   $(".puntaje").html("Puntos= " + puntos);
 }
@@ -182,6 +206,27 @@ function mostrarvidas(){
   $(".vidas").html("Vidas= " + vidas);
 }
 
-function pantallaterminar(){
+$("#controles").on("click", function(){
+  $(".controles").slideDown();
+})
 
-}
+$("#cerrar").on("click", function(){
+  $(".controles").slideUp();
+})
+
+$("#jugar").on("click", function(){
+  $(".juego").slideDown();
+  $(".presentacion").slideUp();
+  mjuego = true;
+})
+
+$("#reiniciar").on("click", function(){
+  reiniciar();
+})
+
+$("#principal").on("click", function(){
+  reiniciar();
+  mjuego = false;
+  $(".presentacion").slideDown();
+  $(".juego").slideUp();
+})

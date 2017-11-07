@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilo.css" media="screen" title="no title" charset="utf-8">
-    <title>juego</title>
-  </head>
-  <body>
-    <div class="presentacion">
-      <div class="logo"></div>
-      <div class="cara"></div>
-      <button type="button" name="button" class="btn btn-warning">JUGAR</button>
-      <button type="button" name="button" class="btn btn-warning">INSTRUCCIONES</button>
+<head>
+  <meta charset="utf-8">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css" media="screen" title="no title" charset="utf-8">
+  <title>juego</title>
+</head>
+<body>
+  <div class="presentacion">
+    <div class="logo"></div>
+    <div class="cara"></div>
+    <div class="botones">
+      <button id="jugar" type="button" name="button" class="btn btn-warning col-md-2 col-md-offset-3">JUGAR</button>
+      <button id="controles" type="button" name="button" class="btn btn-warning col-md-2 col-md-offset-2">CONTROLES</button>
     </div>
-
-    <div class="juego">
-      <div class="fondo">
-        <div class="capa1"><div class="vidas">Vidas= 3</div><div class="puntaje">Puntos= 0</div></div>
-        <div class="capa2"></div>
-        <div class="capa3"></div>
-        <div class="capa4"></div>
-        <div class="capa5"></div>
-      </div>
-      <div class="personaje quieto"></div>
-
+    <div class="controles">
+      <button id="cerrar" type="button" name="button" class="btn btn-danger col-md-3 col-md-offset-9">CERRAR</button>
     </div>
-  </body>
-  <script src="js/jquery-3.1.0.min.js"></script>
-  <script src="js/script.js" charset="utf-8"></script>
+  </div>
+
+  <div class="juego">
+    <div class="fondo">
+      <div class="capa1"><div class="vidas">Vidas= 3</div><div class="puntaje">Puntos= 0</div></div>
+      <div class="capa2"></div>
+      <div class="capa3"></div>
+      <div class="capa4"></div>
+      <div class="capa5"></div>
+    </div>
+    <div class="personaje quieto"></div>
+  </div>
+
+  <div class="termino">
+			<h1>GAME OVER</h1>
+			<h2 id="puntos"></h2>
+			<button id="reiniciar" type="button" name="button" class="btn btn-warning col-md-2 col-md-offset-5">REINICIAR</button>
+      <button id="principal" type="button" name="button" class="btn btn-warning col-md-2 col-md-offset-5">MENU PRINCIPAL</button>
+		</div>
+
+</body>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/script.js" charset="utf-8"></script>
 </html>
