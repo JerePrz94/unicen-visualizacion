@@ -1,4 +1,6 @@
-var mnoc = false
+const vistaGrilla = 1;
+var mnoc = false;
+var modVista = vistaGrilla;
 
 // Modo Nocturno
 $("#nocturno").on("click", function(){
@@ -10,8 +12,9 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("border-color", "#141d26");
     $("#buscar").css("color", "#FFF");
     mnoc = true;
-    $("#nocturno").css("color", "#3A9CF2")
-    $("#nocturno").css("font-weight", "bold")
+    $("#nocturno").css("color", "#3A9CF2");
+    $("#nocturno").css("font-weight", "bold");
+    $(".like-f").css("background-color", "#243447");
   }
   else {
     $("body").css("background-color", "#e6ecf0");
@@ -21,11 +24,23 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("border-color", "#ccc");
     $("#buscar").css("color", "#000");
     mnoc = false;
-    $("#nocturno").css("color", "#777")
-    $("#nocturno").css("font-weight", "normal")
+    $("#nocturno").css("color", "#777");
+    $("#nocturno").css("font-weight", "normal");
+    $(".like-f").css("background-color", "#FFF");
   }
-})
+});
 
+$("#vista").on("click", function(){
+  if (modVista == vistaGrilla){
+    modVista = 2;
+    $("#cont").addClass("desactivar");
+    $("#vist2").removeClass("desactivar");
+  }else if (modVista != vistaGrilla){
+    modVista = vistaGrilla;
+    $("#cont").removeClass("desactivar");
+    $("#vist2").addClass("desactivar");
+  }
+});
 // $(".dimageng").hover(function(){
 //   $(".dimageng"). <h3><span class="glyphicon glyphicon-heart"></span>27</h3>
 // })

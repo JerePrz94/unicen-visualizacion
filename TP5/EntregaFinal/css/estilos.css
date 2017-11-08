@@ -74,6 +74,10 @@ h1{
   display: block;
 }
 
+.desactivar{
+  display: none;
+}
+
 /*Grilla*/
 
 .imageng{
@@ -114,4 +118,51 @@ h1{
 .escaladag{
   transform: scale(2,2);
   transform: scale(3,3);
+}
+
+/*Vista 2*/
+
+.fila{
+  position: inherit;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.imagen-f{
+  margin-bottom: 0px;
+  max-width: 100%;
+}
+
+.imgGrande{
+  margin-top: 26px;
+}
+
+.bordes{
+  padding: 2px;
+  background-color: inherit;
+  margin-bottom: 0px;
+  border-color: transparent;
+}
+
+.flecha{
+  color: #777;
+  text-align: center;
+  display: block;
+  font-size: 34px;
+  position: inherit;
+  line-height: 3;
+}
+
+.flecha:hover{
+  color: #3A9CF2;
+}
+
+.like-f{
+  font-size: 26px;
+  text-align: center;
+  top: -37px;
+  position: relative;
+  background-color: white;
+  margin: 0px;
+  opacity: 0.6;
 }
