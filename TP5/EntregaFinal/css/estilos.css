@@ -1,0 +1,77 @@
+body{
+  background-color: #e6ecf0;
+}
+
+.navbar {
+  background-color: #FFF;
+  margin-bottom: 0px;
+  border: 0px;
+}
+
+.logo{
+  height: 40px;
+  margin-top: 10%;
+}
+
+.navbar-brand{
+  padding: 0px;
+}
+
+.hceleste:hover{
+  color: #3A9CF2;
+}
+
+.centrar{
+  display: block !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buscar{
+  border-radius: 20px;
+}
+
+.panel-body{
+  background-color: #3A9CF2;
+  padding: 10px;
+}
+
+.panel{
+  border: 0px;
+}
+
+h1{
+  color: #FFF;
+  text-align: center;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 32px;
+  margin: 0px;
+}
+
+.contenedor{
+  margin-top: 112px;
+}
+
+.imagen{
+  margin-bottom: 4px;
+  max-width: 33%;
+}
+
+.barra{
+  position: fixed;
+  width: 100%;
+  top: 0px;
+}
+
+
+.escalada{
+  transform: scale(2,2);
+  transform: scale(3,3);
+}
+
+#nocturno{
+  margin-top: 65%;
+  display: block;
+
+}
