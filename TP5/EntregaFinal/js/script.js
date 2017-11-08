@@ -28,19 +28,20 @@ $("#nocturno").on("click", function(){
     $("#nocturno").css("font-weight", "normal");
     $(".like-f").css("background-color", "#FFF");
   }
-});
+})
 
 $("#vista").on("click", function(){
   if (modVista == vistaGrilla){
     modVista = 2;
     $("#cont").addClass("desactivar");
     $("#vist2").removeClass("desactivar");
+    $("#vista").addClass("glyphicon-th");
+    $("#vista").removeClass("glyphicon-blackboard");
   }else if (modVista != vistaGrilla){
     modVista = vistaGrilla;
     $("#cont").removeClass("desactivar");
     $("#vist2").addClass("desactivar");
+    $("#vista").addClass("glyphicon-blackboard");
+    $("#vista").removeClass("glyphicon-th");
   }
 });
-// $(".dimageng").hover(function(){
-//   $(".dimageng"). <h3><span class="glyphicon glyphicon-heart"></span>27</h3>
-// })
