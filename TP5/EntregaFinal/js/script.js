@@ -25,7 +25,3 @@ $("#nocturno").on("click", function(){
     $("#nocturno").css("font-weight", "normal")
   }
 })
-
-// $(".dimageng").hover(function(){
-//   $(".dimageng"). <h3><span class="glyphicon glyphicon-heart"></span>27</h3>
-// })
