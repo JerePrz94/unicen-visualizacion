@@ -126,6 +126,8 @@ h1{
   position: inherit;
   padding-left: 2px;
   padding-right: 2px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .imagen-f{
