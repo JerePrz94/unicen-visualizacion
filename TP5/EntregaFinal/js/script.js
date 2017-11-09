@@ -3,7 +3,7 @@ var mnoc = false;
 var modVista = vistaGrilla;
 
 // Modo Nocturno
-$("#nocturno").on("click", function(){
+$(".nocturno").on("click", function(){
   if (mnoc == false) {
     $("body").css("background-color", "#141d26");
     $("body").css("color", "#FFF");
@@ -11,9 +11,12 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("background-color", "#182430");
     $("#buscar").css("border-color", "#141d26");
     $("#buscar").css("color", "#FFF");
+    $("#buscarp").css("background-color", "#182430");
+    $("#buscarp").css("border-color", "#141d26");
+    $("#buscarp").css("color", "#FFF");
     mnoc = true;
-    $("#nocturno").css("color", "#3A9CF2");
-    $("#nocturno").css("font-weight", "bold");
+    $(".nocturno").css("color", "#3A9CF2");
+    $(".nocturno").css("font-weight", "bold");
     $(".like-f").css("background-color", "#243447");
   }
   else {
@@ -23,9 +26,12 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("background-color", "#FFF");
     $("#buscar").css("border-color", "#ccc");
     $("#buscar").css("color", "#000");
+    $("#buscarp").css("background-color", "#FFF");
+    $("#buscarp").css("border-color", "#ccc");
+    $("#buscarp").css("color", "#000");
     mnoc = false;
-    $("#nocturno").css("color", "#777");
-    $("#nocturno").css("font-weight", "normal");
+    $(".nocturno").css("color", "#777");
+    $(".nocturno").css("font-weight", "normal");
     $(".like-f").css("background-color", "#FFF");
   }
 })
@@ -44,4 +50,11 @@ $("#vista").on("click", function(){
     $("#vista").addClass("glyphicon-blackboard");
     $("#vista").removeClass("glyphicon-th");
   }
+});
+
+$(document).keydown(function(e){
+    if (e.keyCode === 13) {
+      $(".presentacion").css("display", "none");
+      $(".dentro").css("display", "block");
+    }
 });
