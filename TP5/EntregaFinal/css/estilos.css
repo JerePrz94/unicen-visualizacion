@@ -126,17 +126,16 @@ h1{
 .imagen-f{
   margin-bottom: 0px;
   max-width: 100%;
+  height: 100px;
+}
+
+.img-grande{
+  margin-bottom: 0px;
+  max-width: 100%;
 }
 
 .imgGrande{
   margin-top: 26px;
-}
-
-.bordes{
-  padding: 2px;
-  background-color: inherit;
-  margin-bottom: 0px;
-  border-color: transparent;
 }
 
 .flecha{
