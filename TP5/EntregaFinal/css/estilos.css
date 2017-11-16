@@ -151,6 +151,11 @@ h1{
 
 /*Vista 2*/
 
+.lista{
+  overflow: auto;
+  white-space: nowrap;
+}
+
 .fila{
   position: inherit;
   padding-left: 2px;
@@ -160,18 +165,32 @@ h1{
 }
 
 .imagen-f{
+  margin-right: 1px;
   margin-bottom: 0px;
   max-width: 100%;
   height: 100px;
 }
 
-.img-grande{
+.imgCar{
   margin-bottom: 0px;
   max-width: 100%;
+  height: 600px;
 }
 
 .imgGrande{
-  margin-top: 26px;
+  margin-top: 20px;
+  position: relative;
+  perspective: 1100px;
+  height: 650px;
+  overflow: hidden;
+}
+
+
+.bordes{
+  padding: 2px;
+  background-color: inherit;
+  margin-bottom: 0px;
+  border-color: transparent;
 }
 
 .flecha{
@@ -187,7 +206,7 @@ h1{
   color: #3A9CF2;
 }
 
-.like-f{
+.likeCar{
   font-size: 26px;
   text-align: center;
   top: -37px;
@@ -195,4 +214,50 @@ h1{
   background-color: white;
   margin: 0px;
   opacity: 0.6;
+}
+
+#carrousel{
+  transform: translateZ(-1400px);
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.figureCar{
+  margin: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+}
+
+.divCar{
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.anterior {
+  transform: rotateY(-40deg) translateZ(1400px);
+  transition: transform 2s;
+}
+
+.select {
+  transform: rotateY(0deg) translateZ(1400px);
+  transition: transform 2s;
+}
+
+.posterior {
+  transform: rotateY(40deg ) translateZ(1400px);
+  transition: transform 2s;
+}
+
+.glyphicon-heart{
+  animation: latidos .5s infinite;
+}
+
+@keyframes latidos {
+    from { transform: none; }
+    50% { transform: scale(1.4); }
+    to { transform: none; }
 }
