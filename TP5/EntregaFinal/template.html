@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<!-- Principal -->
+  <!-- Principal -->
   <div class=" container presentacion">
     <img class="pajaro" alt="Brand" src="images\logo.png">
     <span type="button" id="nocturnop" class="lnr lnr-moon hceleste nocturno"></span>
@@ -22,7 +22,7 @@
     </form>
   </div>
 
-<!-- Contenido -->
+  <!-- Contenido -->
   <div class="dentro">
     <div class="barra">
       <nav class="navbar navbar-default">
@@ -32,10 +32,19 @@
               <img class="logo" alt="Brand" src="images\logo.png">
             </a>
           </div>
-          <div class="navbar-brand navbar-right">
-            <span type="button" class="lnr lnr-moon hceleste nocturno"></span>
+          <div class="dropdown navbar-brand navbar-right">
+          <span class="glyphicon glyphicon-option-vertical dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>VISTA: <a id="vista" class=" glyphicon glyphicon-blackboard" href="#"></a></li>
+              <li role="separator" class="divider"></li>
+              <li>TRANSICION FOTOS:</li>
+              <li><a  id="desplazar" href="#">-DESPLAZAR</a></li>
+              <li><a id="girar" href="#">-ELQUESEA</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" class="lnr lnr-moon hceleste nocturno"> MODO NOCTURNO</a></li>
+            </ul>
           </div>
-          <form class="navbar-form" role="search">
+          <form id="formulario" class="navbar-form" role="search">
             <div class="form-group centrar">
               <input id="buscar" type="text" class="form-control centrar buscar" placeholder="Buscar">
             </div>
@@ -44,8 +53,7 @@
       </nav>
       <div class="panel panel-default">
         <div class="panel-body">
-          <button id="vista" class="btn btn-default btn-sm glyphicon glyphicon-blackboard" type="button" name="button"></button>
-          <h1>#Hashtag</h1>
+          <h1 id="hash" >#Hashtag</h1>
         </div>
       </div>
     </div>
