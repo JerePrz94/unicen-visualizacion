@@ -3,6 +3,11 @@ var mnoc = false;
 var modVista = vistaGrilla;
 var imagenes = [];
 var hashtag;
+var animacion=1;
+var pos = 1;
+var flechaIzq = 37;
+var flechaDer = 39;
+var search;
 
 // ---- API ----
 var cb = new Codebird;
@@ -11,13 +16,13 @@ cb.setToken("133798046-DvVwEcndjz3fKvEbnsIl2drgWxT2HX9mIhb2Kt11", "BOTqVdG18y5ZL
 // cb.setProxy("https://cb-proxy.herokuapp.com/");
 
 
-
-var params = {
-    q: "#Tandil",
+function buscahash(){
+  var params = {
+    q: search,
     result_type: "mixed",
     count: 100
-};
-cb.__call(
+  };
+  cb.__call(
     "search_tweets",
     params,
     function (reply) {
@@ -54,7 +59,9 @@ cb.__call(
       cargarImagenes();
     },
     true // this parameter required
-);
+  );
+}
+
 
 // ---- Carga las imagenes en la pag ----
 var lista = document.getElementById('lista');
@@ -121,12 +128,12 @@ $(".nocturno").on("click", function(){
     $("#buscar").css("border-color", "#141d26");
     $("#buscar").css("color", "#FFF");
     mnoc = true;
-    $(".nocturno").css("font-weight", "bold");
+
     $(".likeCar").css("background-color", "#243447");
     $(".dropdown-menu").css("background-color", "#243447");
     $(".dropdown-menu").css("color", "#FFF");
     $("li a").css("color", "#8EC5F7");
-    $(".nocturno").css("color", "#3A9CF2");
+    $(".nocturno").css("font-weight", "bold");
     $(".nocturno").css("color", "#3A9CF2");
     $("#dropdownMenu1").css("color", "#FFF");
   }
@@ -165,31 +172,56 @@ $("#vista").on("click", function(){
   }
 });
 
-// ---- Carousel Movimiento ----
-var pos = 1;
-const flechaIzq = 37;
-const flechaDer = 39;
+
+$("#desplazar").css("font-weight", "bold");
+$("#desplazar").css("color", "#3A9CF2");
+
+$("#desplazar").on("click", function(){
+  $("#desplazar").css("font-weight", "bold");
+  $("#desplazar").css("color", "#3A9CF2");
+  $("#girar").css("font-weight", "normal");
+  $("#girar").css("color", "#8EC5F7");
+  animacion = 1;
+});
+
+$("#girar").on("click", function(){
+  $("#girar").css("font-weight", "bold");
+  $("#girar").css("color", "#3A9CF2");
+  $("#desplazar").css("font-weight", "normal");
+  $("#desplazar").css("color", "#8EC5F7");
+  animacion = 2;
+});
+
+
+
+
+// Animacion 1
 document.addEventListener("keydown", function(e){
-  if (modVista != vistaGrilla) {
-    if (e.keyCode === flechaDer) {
-      if (carrousel.childElementCount > pos) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('anterior');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos ++;
-        carrousel.childNodes[pos].classList.remove('posterior');
-        carrousel.childNodes[pos].classList.add('select');
-        document.getElementById(pos-1).classList.add('imgSelect');
+  if (animacion == 1){
+    if (modVista != vistaGrilla) {
+      if (e.keyCode === flechaDer) {
+        if (carrousel.childElementCount > pos) {
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('anterior');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos].classList.remove('posterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
+        return;
       }
-    }else if (e.keyCode === flechaIzq) {
-      if (pos > 1) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('posterior');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos --;
-        carrousel.childNodes[pos].classList.remove('anterior');
-        carrousel.childNodes[pos].classList.add('select');
-        document.getElementById(pos-1).classList.add('imgSelect');
+      else if (e.keyCode === flechaIzq) {
+        if (pos > 1) {
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('posterior');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos].classList.remove('anterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
+        return;
       }
     }
   }
@@ -197,41 +229,53 @@ document.addEventListener("keydown", function(e){
 
 // Animacion 2
 document.addEventListener("keydown", function(e){
-  if (modVista != vistaGrilla) {
-    if (e.keyCode === flechaDer) {
-      if (carrousel.childElementCount > pos) {
-        carrousel.childNodes[pos].classList.remove('girarAdelante');
-        carrousel.childNodes[pos].classList.add('girarAtras');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos ++;
-        carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
-          carrousel.childNodes[pos].classList.remove('girarAtras');
-          carrousel.childNodes[pos].classList.add('girarAdelante');
-        });
-        document.getElementById(pos-1).classList.add('imgSelect');
+  if (animacion == 2) {
+    if (modVista != vistaGrilla) {
+      if (e.keyCode === flechaDer) {
+        if (carrousel.childElementCount > pos) {
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
       }
-    }else if (e.keyCode === flechaIzq) {
-      if (pos > 1) {
-        carrousel.childNodes[pos].classList.remove('girarAdelante');
-        carrousel.childNodes[pos].classList.add('girarAtras');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos --;
-        carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
-          carrousel.childNodes[pos].classList.remove('girarAtras');
-          carrousel.childNodes[pos].classList.add('girarAdelante');
-        });
-        document.getElementById(pos-1).classList.add('imgSelect');
+      else if (e.keyCode === flechaIzq) {
+        if (pos > 1) {
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
       }
     }
   }
 });
 
+
+
+
 $(document).keydown(function(e){
-    if (e.keyCode === 13) {
+  if (e.keyCode === 13) {
+    if ((document.getElementById('formulario').busc.value) == '') {
+      alert("No cargo ningun #Hashtag para ser buscado");
+    }
+    else {
+      search = document.getElementById('formulario').busc.value;
       $(".presentacion").css("display", "none");
       $(".dentro").css("display", "block");
+      buscahash();
+      $("#hash").text(search);
+      e.preventDefault();
     }
+  }
 });
-
-
-$("#hash").text(params.q);
