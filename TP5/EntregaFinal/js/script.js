@@ -22,6 +22,7 @@ function buscahash(){
     result_type: "mixed",
     count: 100
   };
+  imagenes = [];
   cb.__call(
     "search_tweets",
     params,
@@ -67,6 +68,10 @@ function buscahash(){
 var lista = document.getElementById('lista');
 var carrousel = document.getElementById('carrousel');
 function cargarImagenes(){
+  while (lista.hasChildNodes()) {
+    lista.removeChild(lista.firstChild);
+    carrousel.removeChild(carrousel.firstChild);
+  }
   for (var i = 0; i < imagenes.length; i++) {
     var imgList = document.createElement('img');
     imgList.src = imagenes[i].url;
@@ -99,6 +104,9 @@ function cargarImagenes(){
 
 var grilla =document.getElementById('cont');
 function cargarImagenesGrilla(){
+  while (grilla.hasChildNodes()) {
+    grilla.removeChild(grilla.firstChild);
+  }
   for (var i = 0; i < imagenes.length; i++) {
     var div = document.createElement('div');
     div.className = "dimageng";
@@ -173,9 +181,12 @@ $("#vista").on("click", function(){
 });
 
 
+
+
 $("#desplazar").css("font-weight", "bold");
 $("#desplazar").css("color", "#3A9CF2");
 
+// apreta desplazar
 $("#desplazar").on("click", function(){
   $("#desplazar").css("font-weight", "bold");
   $("#desplazar").css("color", "#3A9CF2");
@@ -184,6 +195,7 @@ $("#desplazar").on("click", function(){
   animacion = 1;
 });
 
+// Apreta girar
 $("#girar").on("click", function(){
   $("#girar").css("font-weight", "bold");
   $("#girar").css("color", "#3A9CF2");
@@ -197,7 +209,6 @@ $("#girar").on("click", function(){
 
 // Animacion 1
 document.addEventListener("keydown", function(e){
-  if (animacion == 1){
     if (modVista != vistaGrilla) {
       if (e.keyCode === flechaDer) {
         if (carrousel.childElementCount > pos) {
@@ -224,14 +235,12 @@ document.addEventListener("keydown", function(e){
         return;
       }
     }
-  }
 });
 
 // Animacion 2
 document.addEventListener("keydown", function(e){
-  if (animacion == 2) {
     if (modVista != vistaGrilla) {
-      if (e.keyCode === 38) {
+      if (e.keyCode === flechaDer) {
         if (carrousel.childElementCount > pos) {
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
@@ -244,7 +253,7 @@ document.addEventListener("keydown", function(e){
           document.getElementById(pos-1).classList.add('imgSelect');
         }
       }
-      else if (e.keyCode === 40) {
+      else if (e.keyCode === flechaIzq) {
         if (pos > 1) {
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
@@ -258,12 +267,10 @@ document.addEventListener("keydown", function(e){
         }
       }
     }
-  }
 });
 
 
-
-
+// BUSCAR HASHTAG
 $(document).keydown(function(e){
   if (e.keyCode === 13) {
     if ($(".presentacion").css("display") == "block") {
@@ -272,6 +279,10 @@ $(document).keydown(function(e){
       }
       else {
         search = document.getElementById('formulariop').buscp.value;
+        var letra= search.substring(0, 1);
+        if (letra != "#") {
+          search = "#" + search;
+        }
         $(".presentacion").css("display", "none");
         $(".dentro").css("display", "block");
         buscahash();
@@ -279,12 +290,16 @@ $(document).keydown(function(e){
         e.preventDefault();
       }
     }
-    if ($(".dentro").css("display") == "block") {
+    else if ($(".dentro").css("display") == "block") {
       if ((document.getElementById('formulario').busc.value) == '') {
         alert("No cargo ningun #Hashtag para ser buscado");
       }
       else {
         search = document.getElementById('formulario').busc.value;
+        var letra= search.substring(0, 1);
+        if (letra != "#") {
+          search = "#" + search;
+        }
         $(".presentacion").css("display", "none");
         $(".dentro").css("display", "block");
         buscahash();
