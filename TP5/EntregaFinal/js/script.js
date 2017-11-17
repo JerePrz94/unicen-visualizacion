@@ -131,9 +131,9 @@ $(".nocturno").on("click", function(){
     $("body").css("background-color", "#141d26");
     $("body").css("color", "#FFF");
     $(".navbar").css("background-color", "#243447");
-    $("#buscar").css("background-color", "#182430");
-    $("#buscar").css("border-color", "#141d26");
-    $("#buscar").css("color", "#FFF");
+    $(".buscar").css("background-color", "#182430");
+    $(".buscar").css("border-color", "#141d26");
+    $(".buscar").css("color", "#FFF");
     mnoc = true;
     $(".presentacion").css("background-image", "url(images/oscura.jpg)");
     $(".likeCar").css("background-color", "#243447");
@@ -148,9 +148,9 @@ $(".nocturno").on("click", function(){
     $("body").css("background-color", "#e6ecf0");
     $("body").css("color", "#333");
     $(".navbar").css("background-color", "#FFF");
-    $("#buscar").css("background-color", "#FFF");
-    $("#buscar").css("border-color", "#ccc");
-    $("#buscar").css("color", "#000");
+    $(".buscar").css("background-color", "#FFF");
+    $(".buscar").css("border-color", "#ccc");
+    $(".buscar").css("color", "#000");
     mnoc = false;
     $(".presentacion").css("background-image", "url(images/clara.jpg)");
     $(".nocturno").css("color", "#333");
