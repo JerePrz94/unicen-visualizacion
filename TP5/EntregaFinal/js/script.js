@@ -11,13 +11,15 @@ cb.setToken("133798046-DvVwEcndjz3fKvEbnsIl2drgWxT2HX9mIhb2Kt11", "BOTqVdG18y5ZL
 // cb.setProxy("https://cb-proxy.herokuapp.com/");
 
 
-
-var params = {
-    q: "#Tandil",
+function buscarHashtag() {
+  var params = {
+    q: buscar,
     result_type: "mixed",
     count: 100
-};
-cb.__call(
+  };
+  imagenes = [];
+  $("#hash").text(params.q);
+  cb.__call(
     "search_tweets",
     params,
     function (reply) {
@@ -54,12 +56,17 @@ cb.__call(
       cargarImagenes();
     },
     true // this parameter required
-);
+  );
+}
 
 // ---- Carga las imagenes en la pag ----
 var lista = document.getElementById('lista');
 var carrousel = document.getElementById('carrousel');
 function cargarImagenes(){
+  while (lista.hasChildNodes()) {
+      lista.removeChild(lista.firstChild);
+      carrousel.removeChild(carrousel.firstChild);
+  }
   for (var i = 0; i < imagenes.length; i++) {
     var imgList = document.createElement('img');
     imgList.src = imagenes[i].url;
@@ -92,6 +99,9 @@ function cargarImagenes(){
 
 var grilla =document.getElementById('cont');
 function cargarImagenesGrilla(){
+  while (grilla.hasChildNodes()) {
+      grilla.removeChild(grilla.firstChild);
+  }
   for (var i = 0; i < imagenes.length; i++) {
     var div = document.createElement('div');
     div.className = "dimageng";
@@ -173,65 +183,133 @@ document.addEventListener("keydown", function(e){
   if (modVista != vistaGrilla) {
     if (e.keyCode === flechaDer) {
       if (carrousel.childElementCount > pos) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('anterior');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos ++;
-        carrousel.childNodes[pos].classList.remove('posterior');
-        carrousel.childNodes[pos].classList.add('select');
-        document.getElementById(pos-1).classList.add('imgSelect');
+        if (transicion == 0) {
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('anterior');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos].classList.remove('posterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }else if (transicion == 1) {
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
       }
     }else if (e.keyCode === flechaIzq) {
       if (pos > 1) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('posterior');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos --;
-        carrousel.childNodes[pos].classList.remove('anterior');
-        carrousel.childNodes[pos].classList.add('select');
-        document.getElementById(pos-1).classList.add('imgSelect');
+        if (transicion == 0) {
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('posterior');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos].classList.remove('anterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }else if (transicion == 1) {
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos-1).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos-1).classList.add('imgSelect');
+        }
       }
     }
   }
 });
 
 // Animacion 2
-document.addEventListener("keydown", function(e){
-  if (modVista != vistaGrilla) {
-    if (e.keyCode === flechaDer) {
-      if (carrousel.childElementCount > pos) {
-        carrousel.childNodes[pos].classList.remove('girarAdelante');
-        carrousel.childNodes[pos].classList.add('girarAtras');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos ++;
-        carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
-          carrousel.childNodes[pos].classList.remove('girarAtras');
-          carrousel.childNodes[pos].classList.add('girarAdelante');
-        });
-        document.getElementById(pos-1).classList.add('imgSelect');
-      }
-    }else if (e.keyCode === flechaIzq) {
-      if (pos > 1) {
-        carrousel.childNodes[pos].classList.remove('girarAdelante');
-        carrousel.childNodes[pos].classList.add('girarAtras');
-        document.getElementById(pos-1).classList.remove('imgSelect');
-        pos --;
-        carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
-          carrousel.childNodes[pos].classList.remove('girarAtras');
-          carrousel.childNodes[pos].classList.add('girarAdelante');
-        });
-        document.getElementById(pos-1).classList.add('imgSelect');
-      }
-    }
-  }
-});
-
+// document.addEventListener("keydown", function(e){
+//   if (modVista != vistaGrilla) {
+//     if (e.keyCode === flechaDer) {
+//       if (carrousel.childElementCount > pos) {
+//
+//         carrousel.childNodes[pos].classList.remove('girarAdelante');
+//         carrousel.childNodes[pos].classList.add('girarAtras');
+//         document.getElementById(pos-1).classList.remove('imgSelect');
+//         pos ++;
+//         carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+//           carrousel.childNodes[pos].classList.remove('girarAtras');
+//           carrousel.childNodes[pos].classList.add('girarAdelante');
+//         });
+//         document.getElementById(pos-1).classList.add('imgSelect');
+//       }
+//     }else if (e.keyCode === flechaIzq) {
+//       if (pos > 1) {
+//         carrousel.childNodes[pos].classList.remove('girarAdelante');
+//         carrousel.childNodes[pos].classList.add('girarAtras');
+//         document.getElementById(pos-1).classList.remove('imgSelect');
+//         pos --;
+//         carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+//           carrousel.childNodes[pos].classList.remove('girarAtras');
+//           carrousel.childNodes[pos].classList.add('girarAdelante');
+//         });
+//         document.getElementById(pos-1).classList.add('imgSelect');
+//       }
+//     }
+//   }
+// });
+var buscar;
 $(document).keydown(function(e){
     if (e.keyCode === 13) {
+      e.preventDefault();
+      buscar = document.getElementById('buscarForm').buscar.value;
+      console.log(buscar);
+      buscarHashtag();
       $(".presentacion").css("display", "none");
       $(".dentro").css("display", "block");
     }
 });
 
 
-$("#hash").text(params.q);
+var transicion = 0;
+document.getElementById('desplazar').addEventListener('click', function(){
+  if (transicion == 1){
+    transicion = 0;
+    var aux = 0;
+    var max = carrousel.childElementCount;
+    for (var i = 1; i < max; i++) {
+      if (carrousel.childNodes[pos].hasClass("girarAdelante")){
+        carrousel.childNodes[pos].classList.remove("girarAdelante");
+        carrousel.childNodes[pos].classList.add("select");
+        aux = 1;
+      }else if (carrousel.childNodes[pos].hasClass('girarAtras') && (aux == 0)) {
+        carrousel.childNodes[pos].classList.remove('girarAtras');
+        carrousel.childNodes[pos].classList.add('anterior');
+      }else if (carrousel.childNodes[pos].hasClass('girarAtras') && (aux == 1)) {
+        carrousel.childNodes[pos].classList.remove("girarAtras");
+        carrousel.childNodes[pos].classList.add("posterior");
+      }
+    }
+  }
+});
+
+document.getElementById('girar').addEventListener('click', function(){
+  if (transicion == 0){
+    transicion = 1;
+    var max = carrousel.childElementCount;
+    for (var i = 1; i < max; i++) {
+      if (carrousel.childNodes[pos].hasClass("select")){
+        carrousel.childNodes[pos].classList.remove("select");
+        carrousel.childNodes[pos].classList.add("girarAdelante");
+      }else if (carrousel.childNodes[pos].hasClass("anterior")) {
+        carrousel.childNodes[pos].classList.remove("anterior");
+        carrousel.childNodes[pos].classList.add("girarAtras");
+      }else if (carrousel.childNodes[pos].hasClass("posterior")) {
+        carrousel.childNodes[pos].classList.remove("posterior");
+        carrousel.childNodes[pos].classList.add("girarAtras");
+      }
+    }
+  }
+});
