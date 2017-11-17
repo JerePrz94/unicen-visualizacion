@@ -171,6 +171,7 @@ $("#vista").on("click", function(){
     $("#vist2").removeClass("desactivar");
     $("#vista").addClass("glyphicon-th");
     $("#vista").removeClass("glyphicon-blackboard");
+    autoDesplazar();
   }else if (modVista != vistaGrilla){
     modVista = vistaGrilla;
     $("#cont").removeClass("desactivar");
@@ -326,7 +327,7 @@ $(document).keydown(function(e){
   }
 });
 
-// Agregar animaciones a los likes
+// ---- Agregar animaciones a los likes ----
 function animaciones(){
   for (var i = 0; i < imagenes.length; i++) {
     corazon = 1000 + i;
@@ -341,4 +342,35 @@ function animaciones(){
       $("."+corazon).addClass("rotar");
     }
   }
+}
+
+// ---- Auto desplazamiento ----
+function autoDesplazar(){
+  var play = setInterval(function(){
+    if (carrousel.childElementCount > (pos+1)) {
+      if (animacion === 1) {
+        mov -= document.getElementById(pos).width + 1;
+        lista.style.transform = 'translateX('+ mov + 'px)';
+        carrousel.childNodes[pos].classList.remove('select');
+        carrousel.childNodes[pos].classList.add('anterior');
+        document.getElementById(pos).classList.remove('imgSelect');
+        pos ++;
+        carrousel.childNodes[pos].classList.remove('posterior');
+        carrousel.childNodes[pos].classList.add('select');
+        document.getElementById(pos).classList.add('imgSelect');
+      }else if (animacion === 2) {
+        mov -= document.getElementById(pos).width + 1;
+        lista.style.transform = 'translateX('+ mov + 'px)';
+        carrousel.childNodes[pos].classList.remove('girarAdelante');
+        carrousel.childNodes[pos].classList.add('girarAtras');
+        document.getElementById(pos).classList.remove('imgSelect');
+        pos ++;
+        carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+          carrousel.childNodes[pos].classList.remove('girarAtras');
+          carrousel.childNodes[pos].classList.add('girarAdelante');
+        });
+        document.getElementById(pos).classList.add('imgSelect');
+      }
+    }
+  }, 5000);
 }
