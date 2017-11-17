@@ -91,17 +91,18 @@ function cargarImagenes(){
     pCar.className = "likeCar";
     pCar.innerHTML = imagenes[i].likes;
     var spanCar = document.createElement('span');
-    spanCar.className = "glyphicon glyphicon-heart";
+    var cor = 1000 + i
+    spanCar.className = "glyphicon glyphicon-heart "+ cor;
     pCar.appendChild(spanCar);
     divCar.appendChild(imgCar);
     divCar.appendChild(pCar);
     figure.appendChild(divCar);
     carrousel.appendChild(figure);
   }
-  console.log(carrousel);
+  animaciones();
 }
 
-
+// carga imagenes en la grilla
 var grilla =document.getElementById('cont');
 function cargarImagenesGrilla(){
   while (grilla.hasChildNodes()) {
@@ -117,13 +118,15 @@ function cargarImagenesGrilla(){
     var h3 = document.createElement('h3');
     h3.innerHTML = imagenes[i].likes;
     var span = document.createElement('span');
-    span.className = "glyphicon glyphicon-heart";
+    var cor = 1000 + i
+    span.className = "glyphicon glyphicon-heart "+ cor;
     a.appendChild(img);
     h3.appendChild(span);
     div.appendChild(a);
     div.appendChild(h3);
     grilla.appendChild(div);
   }
+  animaciones();
 }
 
 // ---- Modo Nocturno ----
@@ -205,69 +208,70 @@ $("#girar").on("click", function(){
 });
 
 
-
-
-// Animacion 1
-document.addEventListener("keydown", function(e){
-    if (modVista != vistaGrilla) {
-      if (e.keyCode === flechaDer) {
-        if (carrousel.childElementCount > pos) {
-          carrousel.childNodes[pos].classList.remove('select');
-          carrousel.childNodes[pos].classList.add('anterior');
-          document.getElementById(pos-1).classList.remove('imgSelect');
-          pos ++;
-          carrousel.childNodes[pos].classList.remove('posterior');
-          carrousel.childNodes[pos].classList.add('select');
-          document.getElementById(pos-1).classList.add('imgSelect');
+if (animacion == 1) {
+  // Animacion 1
+  document.addEventListener("keydown", function(e){
+      if (modVista != vistaGrilla) {
+        if (e.keyCode === flechaDer) {
+          if (carrousel.childElementCount > pos) {
+            carrousel.childNodes[pos].classList.remove('select');
+            carrousel.childNodes[pos].classList.add('anterior');
+            document.getElementById(pos-1).classList.remove('imgSelect');
+            pos ++;
+            carrousel.childNodes[pos].classList.remove('posterior');
+            carrousel.childNodes[pos].classList.add('select');
+            document.getElementById(pos-1).classList.add('imgSelect');
+          }
+          return;
         }
-        return;
-      }
-      else if (e.keyCode === flechaIzq) {
-        if (pos > 1) {
-          carrousel.childNodes[pos].classList.remove('select');
-          carrousel.childNodes[pos].classList.add('posterior');
-          document.getElementById(pos-1).classList.remove('imgSelect');
-          pos --;
-          carrousel.childNodes[pos].classList.remove('anterior');
-          carrousel.childNodes[pos].classList.add('select');
-          document.getElementById(pos-1).classList.add('imgSelect');
-        }
-        return;
-      }
-    }
-});
-
-// Animacion 2
-document.addEventListener("keydown", function(e){
-    if (modVista != vistaGrilla) {
-      if (e.keyCode === flechaDer) {
-        if (carrousel.childElementCount > pos) {
-          carrousel.childNodes[pos].classList.remove('girarAdelante');
-          carrousel.childNodes[pos].classList.add('girarAtras');
-          document.getElementById(pos-1).classList.remove('imgSelect');
-          pos ++;
-          carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
-            carrousel.childNodes[pos].classList.remove('girarAtras');
-            carrousel.childNodes[pos].classList.add('girarAdelante');
-          });
-          document.getElementById(pos-1).classList.add('imgSelect');
+        else if (e.keyCode === flechaIzq) {
+          if (pos > 1) {
+            carrousel.childNodes[pos].classList.remove('select');
+            carrousel.childNodes[pos].classList.add('posterior');
+            document.getElementById(pos-1).classList.remove('imgSelect');
+            pos --;
+            carrousel.childNodes[pos].classList.remove('anterior');
+            carrousel.childNodes[pos].classList.add('select');
+            document.getElementById(pos-1).classList.add('imgSelect');
+          }
+          return;
         }
       }
-      else if (e.keyCode === flechaIzq) {
-        if (pos > 1) {
-          carrousel.childNodes[pos].classList.remove('girarAdelante');
-          carrousel.childNodes[pos].classList.add('girarAtras');
-          document.getElementById(pos-1).classList.remove('imgSelect');
-          pos --;
-          carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
-            carrousel.childNodes[pos].classList.remove('girarAtras');
-            carrousel.childNodes[pos].classList.add('girarAdelante');
-          });
-          document.getElementById(pos-1).classList.add('imgSelect');
+  });
+}
+else if (animacion == 2) {
+  // Animacion 2
+  document.addEventListener("keydown", function(e){
+      if (modVista != vistaGrilla) {
+        if (e.keyCode === flechaDer) {
+          if (carrousel.childElementCount > pos) {
+            carrousel.childNodes[pos].classList.remove('girarAdelante');
+            carrousel.childNodes[pos].classList.add('girarAtras');
+            document.getElementById(pos-1).classList.remove('imgSelect');
+            pos ++;
+            carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+              carrousel.childNodes[pos].classList.remove('girarAtras');
+              carrousel.childNodes[pos].classList.add('girarAdelante');
+            });
+            document.getElementById(pos-1).classList.add('imgSelect');
+          }
+        }
+        else if (e.keyCode === flechaIzq) {
+          if (pos > 1) {
+            carrousel.childNodes[pos].classList.remove('girarAdelante');
+            carrousel.childNodes[pos].classList.add('girarAtras');
+            document.getElementById(pos-1).classList.remove('imgSelect');
+            pos --;
+            carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+              carrousel.childNodes[pos].classList.remove('girarAtras');
+              carrousel.childNodes[pos].classList.add('girarAdelante');
+            });
+            document.getElementById(pos-1).classList.add('imgSelect');
+          }
         }
       }
-    }
-});
+  });
+}
 
 
 // BUSCAR HASHTAG
@@ -309,3 +313,21 @@ $(document).keydown(function(e){
     }
   }
 });
+
+
+// Agregar animaciones a los likes
+function animaciones(){
+  for (var i = 0; i < imagenes.length; i++) {
+    corazon = 1000 + i;
+    var anima= Math.floor(Math.random()*3);
+    if (anima == 0) {
+      $("."+corazon).addClass("latir");
+    }
+    else if (anima == 1) {
+      $("."+corazon).addClass("girar3d");
+    }
+    else if (anima == 2) {
+      $("."+corazon).addClass("rotar");
+    }
+  }
+}

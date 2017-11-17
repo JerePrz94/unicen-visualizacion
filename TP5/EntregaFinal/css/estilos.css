@@ -77,29 +77,30 @@ h1{
 
 .presentacion{
   display: block;
+  height: 100%;
 }
 
 .pajaro{
   width: 8%;
-  position: absolute;
-  top: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .formulario{
-  width: 55%;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 38%;
 }
 
 #buscarp{
-  height: 50px;
+  margin-top: 10px;
+  height: 40px;
 }
 
 #nocturnop{
   margin: 0px;
+  margin-top: 10px;
   position: absolute;
-  top: 46%;
   right: 28%;
   font-size: 28px;
 }
@@ -126,9 +127,11 @@ h1{
 
 .dimageng{
   margin-bottom: 4px;
+  margin-right: 3px;
   width: 33%;
   display: inline-block;
   position: relative;
+  text-align:center;
 }
 
 .dimageng h3{
@@ -137,6 +140,7 @@ h1{
   top: 0px;
   text-align: center;
   z-index: -1;
+  padding-top: 30%;
 }
 
 .desvanecer:hover {
@@ -260,8 +264,16 @@ h1{
   transition: transform 2s;
 }
 
-.glyphicon-heart{
-  animation: latidos .5s infinite;
+.latir{
+  animation: latidos 0.5s infinite;
+}
+
+.girar3d{
+  animation: gira3d 1.0s infinite;
+}
+
+.rotar{
+  animation: rota 1.0s infinite;
 }
 
 @keyframes latidos {
@@ -269,6 +281,17 @@ h1{
     50% { transform: scale(1.4); }
     to { transform: none; }
 }
+
+@keyframes gira3d {
+    from { transform: perspective(400px) rotateY(0deg) }
+    to { transform: perspective(400px) rotateY(360deg) }
+}
+
+@keyframes rota {
+    from { transform: rotate(0deg) }
+    to { transform: rotate(360deg) }
+}
+
 
 html{
   height: 100%;
