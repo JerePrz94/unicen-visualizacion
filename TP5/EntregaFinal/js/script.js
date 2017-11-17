@@ -2,12 +2,15 @@ const vistaGrilla = 1;
 var mnoc = false;
 var modVista = vistaGrilla;
 var imagenes = [];
+var hashtag;
 
 // ---- API ----
 var cb = new Codebird;
 cb.setConsumerKey("4CJBqbebmf9IVwWBPG10qQD1q", "WL3dxEK9CEwqAeLzqfrI6L22rVCwBLKJahUnMocBVY2qStym25");
 cb.setToken("133798046-DvVwEcndjz3fKvEbnsIl2drgWxT2HX9mIhb2Kt11", "BOTqVdG18y5ZLjNc9DRI9dgmN1K7f6Ew2ZHC4r3a2zyCf");
 // cb.setProxy("https://cb-proxy.herokuapp.com/");
+
+
 
 var params = {
     q: "#Tandil",
@@ -109,7 +112,7 @@ function cargarImagenesGrilla(){
 }
 
 // ---- Modo Nocturno ----
-$("#nocturno").on("click", function(){
+$(".nocturno").on("click", function(){
   if (mnoc == false) {
     $("body").css("background-color", "#141d26");
     $("body").css("color", "#FFF");
@@ -118,9 +121,14 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("border-color", "#141d26");
     $("#buscar").css("color", "#FFF");
     mnoc = true;
-    $("#nocturno").css("color", "#3A9CF2");
-    $("#nocturno").css("font-weight", "bold");
-    $(".like-f").css("background-color", "#243447");
+    $(".nocturno").css("font-weight", "bold");
+    $(".likeCar").css("background-color", "#243447");
+    $(".dropdown-menu").css("background-color", "#243447");
+    $(".dropdown-menu").css("color", "#FFF");
+    $("li a").css("color", "#8EC5F7");
+    $(".nocturno").css("color", "#3A9CF2");
+    $(".nocturno").css("color", "#3A9CF2");
+    $("#dropdownMenu1").css("color", "#FFF");
   }
   else {
     $("body").css("background-color", "#e6ecf0");
@@ -130,9 +138,13 @@ $("#nocturno").on("click", function(){
     $("#buscar").css("border-color", "#ccc");
     $("#buscar").css("color", "#000");
     mnoc = false;
-    $("#nocturno").css("color", "#777");
-    $("#nocturno").css("font-weight", "normal");
-    $(".like-f").css("background-color", "#FFF");
+    $(".nocturno").css("color", "#333");
+    $(".nocturno").css("font-weight", "normal");
+    $(".likeCar").css("background-color", "#FFF");
+    $(".dropdown-menu").css("background-color", "#FFF");
+    $(".dropdown-menu").css("color", "#333");
+    $("li a").css("color", "#333");
+    $("#dropdownMenu1").css("color", "#777");
   }
 })
 
@@ -185,3 +197,6 @@ $(document).keydown(function(e){
       $(".dentro").css("display", "block");
     }
 });
+
+
+$("#hash").text(params.q);
