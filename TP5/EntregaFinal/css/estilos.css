@@ -288,12 +288,12 @@ html{
 
 .girarAtras {
   transform: rotate(0deg) translateZ(0px);
-  transition: transform 2s;
+  transition: transform 1s;
 }
 
 .girarAdelante {
   transform: rotate(360deg) translateZ(1400px);
-  transition: transform 2s;
+  transition: transform 1s;
 }
 
 .ocultar {
