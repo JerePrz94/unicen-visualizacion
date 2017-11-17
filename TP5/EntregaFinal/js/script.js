@@ -193,18 +193,28 @@ $("#desplazar").css("color", "#3A9CF2");
 // apreta desplazar
 $("#desplazar").on("click", function(){
   $("#desplazar").css("font-weight", "bold");
-  $("#desplazar").css("color", "#3A9CF2");
+  $("#desplazar").css("color", "#3A9CF2 !important");
   $("#girar").css("font-weight", "normal");
-  $("#girar").css("color", "#8EC5F7");
+  if (mnoc) {
+    $("#girar").css("color", "#8EC5F7");
+  }
+  else {
+    $("#girar").css("color", "#333");
+  }
   animacion = 1;
 });
 
 // Apreta girar
 $("#girar").on("click", function(){
   $("#girar").css("font-weight", "bold");
-  $("#girar").css("color", "#3A9CF2");
+  $("#girar").css("color", "#3A9CF2 !important");
   $("#desplazar").css("font-weight", "normal");
-  $("#desplazar").css("color", "#8EC5F7");
+  if (mnoc) {
+    $("#desplazar").css("color", "#8EC5F7");
+  }
+  else{
+    $("#desplazar").css("color", "#333");
+  }
   animacion = 2;
 });
 
