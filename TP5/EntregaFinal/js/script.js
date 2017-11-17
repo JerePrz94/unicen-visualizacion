@@ -139,7 +139,7 @@ $(".nocturno").on("click", function(){
     $("#buscar").css("border-color", "#141d26");
     $("#buscar").css("color", "#FFF");
     mnoc = true;
-
+    $(".presentacion").css("background-image", "url(images/oscura.jpg)");
     $(".likeCar").css("background-color", "#243447");
     $(".dropdown-menu").css("background-color", "#243447");
     $(".dropdown-menu").css("color", "#FFF");
@@ -156,6 +156,7 @@ $(".nocturno").on("click", function(){
     $("#buscar").css("border-color", "#ccc");
     $("#buscar").css("color", "#000");
     mnoc = false;
+    $(".presentacion").css("background-image", "url(images/clara.jpg)");
     $(".nocturno").css("color", "#333");
     $(".nocturno").css("font-weight", "normal");
     $(".likeCar").css("background-color", "#FFF");
