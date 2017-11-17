@@ -231,7 +231,7 @@ document.addEventListener("keydown", function(e){
 document.addEventListener("keydown", function(e){
   if (animacion == 2) {
     if (modVista != vistaGrilla) {
-      if (e.keyCode === flechaDer) {
+      if (e.keyCode === 38) {
         if (carrousel.childElementCount > pos) {
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
@@ -244,7 +244,7 @@ document.addEventListener("keydown", function(e){
           document.getElementById(pos-1).classList.add('imgSelect');
         }
       }
-      else if (e.keyCode === flechaIzq) {
+      else if (e.keyCode === 40) {
         if (pos > 1) {
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
@@ -266,16 +266,31 @@ document.addEventListener("keydown", function(e){
 
 $(document).keydown(function(e){
   if (e.keyCode === 13) {
-    if ((document.getElementById('formulario').busc.value) == '') {
-      alert("No cargo ningun #Hashtag para ser buscado");
+    if ($(".presentacion").css("display") == "block") {
+      if ((document.getElementById('formulariop').buscp.value) == '') {
+        alert("No cargo ningun #Hashtag para ser buscado");
+      }
+      else {
+        search = document.getElementById('formulariop').buscp.value;
+        $(".presentacion").css("display", "none");
+        $(".dentro").css("display", "block");
+        buscahash();
+        $("#hash").text(search);
+        e.preventDefault();
+      }
     }
-    else {
-      search = document.getElementById('formulario').busc.value;
-      $(".presentacion").css("display", "none");
-      $(".dentro").css("display", "block");
-      buscahash();
-      $("#hash").text(search);
-      e.preventDefault();
+    if ($(".dentro").css("display") == "block") {
+      if ((document.getElementById('formulario').busc.value) == '') {
+        alert("No cargo ningun #Hashtag para ser buscado");
+      }
+      else {
+        search = document.getElementById('formulario').busc.value;
+        $(".presentacion").css("display", "none");
+        $(".dentro").css("display", "block");
+        buscahash();
+        $("#hash").text(search);
+        e.preventDefault();
+      }
     }
   }
 });
