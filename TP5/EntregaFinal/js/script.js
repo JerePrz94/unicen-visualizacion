@@ -226,11 +226,14 @@ document.getElementById('girar').addEventListener('click', function(){
 });
 
 // ---- Transiciones ----
+var mov = 0;
 document.addEventListener("keydown", function(e){
   if (modVista != vistaGrilla) {
     if (e.keyCode === flechaDer) {
       if (carrousel.childElementCount > (pos+1)) {
         if (animacion === 1) {
+          mov -= document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
           carrousel.childNodes[pos].classList.remove('select');
           carrousel.childNodes[pos].classList.add('anterior');
           document.getElementById(pos).classList.remove('imgSelect');
@@ -239,6 +242,8 @@ document.addEventListener("keydown", function(e){
           carrousel.childNodes[pos].classList.add('select');
           document.getElementById(pos).classList.add('imgSelect');
         }else if (animacion === 2) {
+          mov -= document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
           document.getElementById(pos).classList.remove('imgSelect');
@@ -251,8 +256,10 @@ document.addEventListener("keydown", function(e){
         }
       }
     }else if (e.keyCode === flechaIzq) {
-      if (pos > 1) {
+      if (pos > 0) {
         if (animacion === 1) {
+          mov += document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
           carrousel.childNodes[pos].classList.remove('select');
           carrousel.childNodes[pos].classList.add('posterior');
           document.getElementById(pos).classList.remove('imgSelect');
@@ -261,6 +268,8 @@ document.addEventListener("keydown", function(e){
           carrousel.childNodes[pos].classList.add('select');
           document.getElementById(pos).classList.add('imgSelect');
         }else if (animacion === 2) {
+          mov += document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
           carrousel.childNodes[pos].classList.remove('girarAdelante');
           carrousel.childNodes[pos].classList.add('girarAtras');
           document.getElementById(pos).classList.remove('imgSelect');

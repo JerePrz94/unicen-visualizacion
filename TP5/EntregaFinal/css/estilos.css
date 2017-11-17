@@ -166,8 +166,6 @@ h1{
 
 .fila{
   position: inherit;
-  padding-left: 2px;
-  padding-right: 2px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -321,4 +319,8 @@ html{
 
 .ocultar {
   display: none;
+}
+
+#lista {
+  transition: transform .5s;
 }
