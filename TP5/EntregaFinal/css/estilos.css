@@ -1,7 +1,7 @@
 /*Generales*/
-
 body{
   background-color: #e6ecf0;
+  height: 90%;
 }
 
 .navbar {
@@ -64,6 +64,7 @@ h1{
 
 .contenedor{
   margin-top: 112px;
+  height: 100%;
 }
 
 .nocturno{
@@ -113,6 +114,7 @@ h1{
 
 .dentro{
   display: none;
+  height: 100%;
 }
 
 /*Grilla*/
@@ -154,7 +156,7 @@ h1{
 /*Vista 2*/
 
 .lista{
-  overflow: auto;
+  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -171,19 +173,20 @@ h1{
   margin-bottom: 0px;
   max-width: 100%;
   height: 100px;
+  padding: 1px;
 }
 
 .imgCar{
   margin-bottom: 0px;
   max-width: 100%;
-  height: 600px;
+  height: 100%;
 }
 
 .imgGrande{
-  margin-top: 20px;
+  margin-top: 10px;
   position: relative;
   perspective: 1100px;
-  height: 650px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -224,6 +227,7 @@ h1{
   transition: transform 1s;
   width: 100%;
   margin: 20px auto;
+  height: 100%;
 }
 
 .figureCar{
@@ -231,12 +235,14 @@ h1{
   display: block;
   position: absolute;
   width: 100%;
+  height: 90%;
 }
 
 .divCar{
   margin: 0 auto;
   width: -moz-fit-content;
   width: fit-content;
+  height: 95%;
 }
 
 .anterior {
@@ -262,4 +268,34 @@ h1{
     from { transform: none; }
     50% { transform: scale(1.4); }
     to { transform: none; }
+}
+
+html{
+  height: 100%;
+}
+
+.rowTamC{
+  height: 1%;
+}
+
+.rowTamG{
+  height: 80%;
+}
+
+.imgSelect{
+  border: solid #3A9CF2 1px;
+}
+
+.girarAtras {
+  transform: rotate(0deg) translateZ(0px);
+  transition: transform 2s;
+}
+
+.girarAdelante {
+  transform: rotate(360deg) translateZ(1400px);
+  transition: transform 2s;
+}
+
+.ocultar {
+  display: none;
 }
