@@ -89,14 +89,15 @@ function cargarImagenes(){
     pCar.className = "likeCar";
     pCar.innerHTML = imagenes[i].likes;
     var spanCar = document.createElement('span');
-    spanCar.className = "glyphicon glyphicon-heart";
+    var cor = 1000 + i
+    spanCar.className = "glyphicon glyphicon-heart "+ cor;
     pCar.appendChild(spanCar);
     divCar.appendChild(imgCar);
     divCar.appendChild(pCar);
     figure.appendChild(divCar);
     carrousel.appendChild(figure);
   }
-  console.log(carrousel);
+  animaciones();
 }
 
 function cargarImagenesGrilla(){
@@ -113,13 +114,15 @@ function cargarImagenesGrilla(){
     var h3 = document.createElement('h3');
     h3.innerHTML = imagenes[i].likes;
     var span = document.createElement('span');
-    span.className = "glyphicon glyphicon-heart";
+    var cor = 1000 + i
+    span.className = "glyphicon glyphicon-heart "+ cor;
     a.appendChild(img);
     h3.appendChild(span);
     div.appendChild(a);
     div.appendChild(h3);
     grilla.appendChild(div);
   }
+  animaciones();
 }
 
 // ---- Modo Nocturno ----
@@ -312,3 +315,20 @@ $(document).keydown(function(e){
     }
   }
 });
+
+// Agregar animaciones a los likes
+function animaciones(){
+  for (var i = 0; i < imagenes.length; i++) {
+    corazon = 1000 + i;
+    var anima= Math.floor(Math.random()*3);
+    if (anima == 0) {
+      $("."+corazon).addClass("latir");
+    }
+    else if (anima == 1) {
+      $("."+corazon).addClass("girar3d");
+    }
+    else if (anima == 2) {
+      $("."+corazon).addClass("rotar");
+    }
+  }
+}
