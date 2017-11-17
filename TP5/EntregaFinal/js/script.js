@@ -61,7 +61,7 @@ function cargarImagenes(){
     var imgList = document.createElement('img');
     imgList.src = imagenes[i].url;
     imgList.id = i;
-    imgList.className = "imagen-f";
+    imgList.className = (i == 0) ? "imagen-f imgSelect" : "imagen-f";
     var a = document.createElement('a');
     a.appendChild(imgList);
     lista.appendChild(a);
@@ -157,31 +157,66 @@ $("#vista").on("click", function(){
 var pos = 1;
 const flechaIzq = 37;
 const flechaDer = 39;
-document.addEventListener("keydown", function(e){
-  if (modVista != vistaGrilla) {
-    if (e.keyCode === flechaDer) {
-      if (carrousel.childElementCount > pos) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('anterior');
-        pos ++;
-        carrousel.childNodes[pos].classList.remove('posterior');
-        carrousel.childNodes[pos].classList.add('select');
-      }
-    }else if (e.keyCode === flechaIzq) {
-      if (pos > 1) {
-        carrousel.childNodes[pos].classList.remove('select');
-        carrousel.childNodes[pos].classList.add('posterior');
-        pos --;
-        carrousel.childNodes[pos].classList.remove('anterior');
-        carrousel.childNodes[pos].classList.add('select');
-      }
-    }
-  }
-});
+// document.addEventListener("keydown", function(e){
+//   if (modVista != vistaGrilla) {
+//     if (e.keyCode === flechaDer) {
+//       if (carrousel.childElementCount > pos) {
+//         carrousel.childNodes[pos].classList.remove('select');
+//         carrousel.childNodes[pos].classList.add('anterior');
+//         document.getElementById(pos-1).classList.remove('imgSelect');
+//         pos ++;
+//         carrousel.childNodes[pos].classList.remove('posterior');
+//         carrousel.childNodes[pos].classList.add('select');
+//         document.getElementById(pos-1).classList.add('imgSelect');
+//       }
+//     }else if (e.keyCode === flechaIzq) {
+//       if (pos > 1) {
+//         carrousel.childNodes[pos].classList.remove('select');
+//         carrousel.childNodes[pos].classList.add('posterior');
+//         document.getElementById(pos-1).classList.remove('imgSelect');
+//         pos --;
+//         carrousel.childNodes[pos].classList.remove('anterior');
+//         carrousel.childNodes[pos].classList.add('select');
+//         document.getElementById(pos-1).classList.add('imgSelect');
+//       }
+//     }
+//   }
+// });
 
 $(document).keydown(function(e){
     if (e.keyCode === 13) {
       $(".presentacion").css("display", "none");
       $(".dentro").css("display", "block");
     }
+});
+
+// Animacion 2
+document.addEventListener("keydown", function(e){
+  if (modVista != vistaGrilla) {
+    if (e.keyCode === flechaDer) {
+      if (carrousel.childElementCount > pos) {
+        carrousel.childNodes[pos].classList.remove('girarAdelante');
+        carrousel.childNodes[pos].classList.add('girarAtras');
+        document.getElementById(pos-1).classList.remove('imgSelect');
+        pos ++;
+        carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+          carrousel.childNodes[pos].classList.remove('girarAtras');
+          carrousel.childNodes[pos].classList.add('girarAdelante');
+        });
+        document.getElementById(pos-1).classList.add('imgSelect');
+      }
+    }else if (e.keyCode === flechaIzq) {
+      if (pos > 1) {
+        carrousel.childNodes[pos].classList.remove('girarAdelante');
+        carrousel.childNodes[pos].classList.add('girarAtras');
+        document.getElementById(pos-1).classList.remove('imgSelect');
+        pos --;
+        carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+          carrousel.childNodes[pos].classList.remove('girarAtras');
+          carrousel.childNodes[pos].classList.add('girarAdelante');
+        });
+        document.getElementById(pos-1).classList.add('imgSelect');
+      }
+    }
+  }
 });
