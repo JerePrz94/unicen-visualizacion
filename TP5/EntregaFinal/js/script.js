@@ -1,20 +1,21 @@
+var grilla = document.getElementById('cont');
+var lista = document.getElementById('lista');
+var carrousel = document.getElementById('carrousel');
 const vistaGrilla = 1;
 var mnoc = false;
 var modVista = vistaGrilla;
 var imagenes = [];
 var hashtag;
 var animacion=1;
-var pos = 1;
+var pos = 0;
 var flechaIzq = 37;
 var flechaDer = 39;
 var search;
-
 // ---- API ----
 var cb = new Codebird;
 cb.setConsumerKey("4CJBqbebmf9IVwWBPG10qQD1q", "WL3dxEK9CEwqAeLzqfrI6L22rVCwBLKJahUnMocBVY2qStym25");
 cb.setToken("133798046-DvVwEcndjz3fKvEbnsIl2drgWxT2HX9mIhb2Kt11", "BOTqVdG18y5ZLjNc9DRI9dgmN1K7f6Ew2ZHC4r3a2zyCf");
 // cb.setProxy("https://cb-proxy.herokuapp.com/");
-
 
 function buscahash(){
   var params = {
@@ -63,10 +64,7 @@ function buscahash(){
   );
 }
 
-
 // ---- Carga las imagenes en la pag ----
-var lista = document.getElementById('lista');
-var carrousel = document.getElementById('carrousel');
 function cargarImagenes(){
   while (lista.hasChildNodes()) {
     lista.removeChild(lista.firstChild);
@@ -102,8 +100,6 @@ function cargarImagenes(){
   animaciones();
 }
 
-// carga imagenes en la grilla
-var grilla =document.getElementById('cont');
 function cargarImagenesGrilla(){
   while (grilla.hasChildNodes()) {
     grilla.removeChild(grilla.firstChild);
@@ -184,127 +180,132 @@ $("#vista").on("click", function(){
   }
 });
 
-
-
-
 $("#desplazar").css("font-weight", "bold");
 $("#desplazar").css("color", "#3A9CF2");
 
-// apreta desplazar
-$("#desplazar").on("click", function(){
-  $("#desplazar").css("font-weight", "bold");
-  $("#desplazar").css("color", "#3A9CF2 !important");
-  $("#girar").css("font-weight", "normal");
-  if (mnoc) {
+// ---- Apreta desplazar ----
+document.getElementById('desplazar').addEventListener('click', function(){
+  if (animacion == 2){
+    $("#desplazar").css("font-weight", "bold");
+    $("#desplazar").css("color", "#3A9CF2");
+    $("#girar").css("font-weight", "normal");
     $("#girar").css("color", "#8EC5F7");
-  }
-  else {
-    $("#girar").css("color", "#333");
-  }
-  animacion = 1;
-});
-
-// Apreta girar
-$("#girar").on("click", function(){
-  $("#girar").css("font-weight", "bold");
-  $("#girar").css("color", "#3A9CF2 !important");
-  $("#desplazar").css("font-weight", "normal");
-  if (mnoc) {
-    $("#desplazar").css("color", "#8EC5F7");
-  }
-  else{
-    $("#desplazar").css("color", "#333");
-  }
-  animacion = 2;
-});
-
-
-if (animacion == 1) {
-  // Animacion 1
-  document.addEventListener("keydown", function(e){
-      if (modVista != vistaGrilla) {
-        if (e.keyCode === flechaDer) {
-          if (carrousel.childElementCount > pos) {
-            carrousel.childNodes[pos].classList.remove('select');
-            carrousel.childNodes[pos].classList.add('anterior');
-            document.getElementById(pos-1).classList.remove('imgSelect');
-            pos ++;
-            carrousel.childNodes[pos].classList.remove('posterior');
-            carrousel.childNodes[pos].classList.add('select');
-            document.getElementById(pos-1).classList.add('imgSelect');
-          }
-          return;
-        }
-        else if (e.keyCode === flechaIzq) {
-          if (pos > 1) {
-            carrousel.childNodes[pos].classList.remove('select');
-            carrousel.childNodes[pos].classList.add('posterior');
-            document.getElementById(pos-1).classList.remove('imgSelect');
-            pos --;
-            carrousel.childNodes[pos].classList.remove('anterior');
-            carrousel.childNodes[pos].classList.add('select');
-            document.getElementById(pos-1).classList.add('imgSelect');
-          }
-          return;
-        }
-      }
-  });
-}
-else if (animacion == 2) {
-  // Animacion 2
-  document.addEventListener("keydown", function(e){
-      if (modVista != vistaGrilla) {
-        if (e.keyCode === flechaDer) {
-          if (carrousel.childElementCount > pos) {
-            carrousel.childNodes[pos].classList.remove('girarAdelante');
-            carrousel.childNodes[pos].classList.add('girarAtras');
-            document.getElementById(pos-1).classList.remove('imgSelect');
-            pos ++;
-            carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
-              carrousel.childNodes[pos].classList.remove('girarAtras');
-              carrousel.childNodes[pos].classList.add('girarAdelante');
-            });
-            document.getElementById(pos-1).classList.add('imgSelect');
-          }
-        }
-        else if (e.keyCode === flechaIzq) {
-          if (pos > 1) {
-            carrousel.childNodes[pos].classList.remove('girarAdelante');
-            carrousel.childNodes[pos].classList.add('girarAtras');
-            document.getElementById(pos-1).classList.remove('imgSelect');
-            pos --;
-            carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
-              carrousel.childNodes[pos].classList.remove('girarAtras');
-              carrousel.childNodes[pos].classList.add('girarAdelante');
-            });
-            document.getElementById(pos-1).classList.add('imgSelect');
-          }
-        }
-      }
-  });
-}
-
-
-// BUSCAR HASHTAG
-$(document).keydown(function(e){
-  if (e.keyCode === 13) {
-    if ($(".presentacion").css("display") == "block") {
-      if ((document.getElementById('formulariop').buscp.value) == '') {
-        alert("No cargo ningun #Hashtag para ser buscado");
-      }
-      else {
-        search = document.getElementById('formulariop').buscp.value;
-        var letra= search.substring(0, 1);
-        if (letra != "#") {
-          search = "#" + search;
-        }
-        $(".presentacion").css("display", "none");
-        $(".dentro").css("display", "block");
-        buscahash();
-        $("#hash").text(search);
-        e.preventDefault();
+    animacion = 1;
+    var aux = 0;
+    var max = carrousel.childElementCount;
+    for (var i = 0; i < max; i++) {
+      if (carrousel.childNodes[i].hasClass(".girarAdelante")){
+        carrousel.childNodes[i].classList.remove("girarAdelante");
+        carrousel.childNodes[i].classList.add("select");
+        aux = 1;
+      }else if ((carrousel.childNodes[i].hasClass(".girarAtras")) && (aux == 0)) {
+        carrousel.childNodes[i].classList.remove("girarAtras");
+        carrousel.childNodes[i].classList.add("anterior");
+      }else if ((carrousel.childNodes[i].hasClass(".girarAtras")) && (aux == 1)) {
+        carrousel.childNodes[i].classList.remove("girarAtras");
+        carrousel.childNodes[i].classList.add("posterior");
       }
     }
+  }
+});
+
+// ---- Apreta girar ----
+document.getElementById('girar').addEventListener('click', function(){
+  if (animacion == 1){
+    $("#girar").css("font-weight", "bold");
+    $("#girar").css("color", "#3A9CF2");
+    $("#desplazar").css("font-weight", "normal");
+    $("#desplazar").css("color", "#8EC5F7");
+    animacion = 2;
+    var max = carrousel.childElementCount;
+    for (var i = 0; i < max; i++) {
+      carrousel.childNodes[i].classList.replace("select", "girarAdelante");
+      carrousel.childNodes[i].classList.replace("anterior", "girarAtras");
+      carrousel.childNodes[i].classList.replace("posterior", "girarAtras");
+    }
+  }
+});
+
+// ---- Transiciones ----
+var mov = 0;
+document.addEventListener("keydown", function(e){
+  if (modVista != vistaGrilla) {
+    if (e.keyCode === flechaDer) {
+      if (carrousel.childElementCount > (pos+1)) {
+        if (animacion === 1) {
+          mov -= document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('anterior');
+          document.getElementById(pos).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos].classList.remove('posterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos).classList.add('imgSelect');
+        }else if (animacion === 2) {
+          mov -= document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos).classList.remove('imgSelect');
+          pos ++;
+          carrousel.childNodes[pos-1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos).classList.add('imgSelect');
+        }
+      }
+    }else if (e.keyCode === flechaIzq) {
+      if (pos > 0) {
+        if (animacion === 1) {
+          mov += document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
+          carrousel.childNodes[pos].classList.remove('select');
+          carrousel.childNodes[pos].classList.add('posterior');
+          document.getElementById(pos).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos].classList.remove('anterior');
+          carrousel.childNodes[pos].classList.add('select');
+          document.getElementById(pos).classList.add('imgSelect');
+        }else if (animacion === 2) {
+          mov += document.getElementById(pos).width + 1;
+          lista.style.transform = 'translateX('+ mov + 'px)';
+          carrousel.childNodes[pos].classList.remove('girarAdelante');
+          carrousel.childNodes[pos].classList.add('girarAtras');
+          document.getElementById(pos).classList.remove('imgSelect');
+          pos --;
+          carrousel.childNodes[pos+1].addEventListener("transitionend", function(){
+            carrousel.childNodes[pos].classList.remove('girarAtras');
+            carrousel.childNodes[pos].classList.add('girarAdelante');
+          });
+          document.getElementById(pos).classList.add('imgSelect');
+        }
+      }
+    }
+  }
+});
+
+// ---- Buscar ----
+$(document).keydown(function(e){
+ if (e.keyCode === 13) {
+   if ($(".presentacion").css("display") == "block") {
+     if ((document.getElementById('formulariop').buscp.value) == '') {
+       alert("No cargo ningun #Hashtag para ser buscado");
+     }
+     else {
+       search = document.getElementById('formulariop').buscp.value;
+       var letra= search.substring(0, 1);
+       if (letra != "#") {
+         search = "#" + search;
+       }
+       $(".presentacion").css("display", "none");
+       $(".dentro").css("display", "block");
+       buscahash();
+       $("#hash").text(search);
+       e.preventDefault();
+     }
+   }
     else if ($(".dentro").css("display") == "block") {
       if ((document.getElementById('formulario').busc.value) == '') {
         alert("No cargo ningun #Hashtag para ser buscado");
@@ -324,7 +325,6 @@ $(document).keydown(function(e){
     }
   }
 });
-
 
 // Agregar animaciones a los likes
 function animaciones(){
