@@ -13,7 +13,7 @@ cb.setToken("133798046-DvVwEcndjz3fKvEbnsIl2drgWxT2HX9mIhb2Kt11", "BOTqVdG18y5ZL
 
 
 var params = {
-    q: buscar,
+    q: "#Tandil",
     result_type: "mixed",
     count: 100
 };
